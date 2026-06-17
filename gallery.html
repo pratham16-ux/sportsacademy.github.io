@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Stackly Sports Academy</title>
+<meta name="description" content="Photos and highlights from Stackly Sports Academy's training campuses, match days, and season results across all five sports.">
+<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-row">
+    <a href="index.html" class="brand">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="brand-mark" width="110" height="44" loading="eager">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-ghost">Book a trial</a>
+        <a href="contact.html" class="btn btn-primary">Enrol now</a>
+      </div>
+    </nav>
+    <button class="hamburger" aria-expanded="false" aria-label="Open menu" aria-controls="mobileDrawer">
+      <span class="hamburger-box">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer" data-open="false">
+  <div class="drawer-backdrop"></div>
+  <nav class="drawer-panel" aria-label="Mobile">
+    <ul class="drawer-links">
+      <li><a href="index.html"><span>Home</span><span class="num">01</span></a></li>
+      <li><a href="programs.html"><span>Programs</span><span class="num">02</span></a></li>
+      <li><a href="coaches.html"><span>Coaches</span><span class="num">03</span></a></li>
+      <li><a href="gallery.html" aria-current="page"><span>Gallery</span><span class="num">04</span></a></li>
+      <li><a href="contact.html"><span>Contact</span><span class="num">05</span></a></li>
+    </ul>
+    <div class="drawer-foot">
+      <a href="contact.html" class="btn btn-gold">Book a free trial session</a>
+      <div class="drawer-contact">
+        <span>Open daily · 6:00am – 8:30pm</span>
+        <a href="tel:+919876543210">+91 98765 43210</a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- 1. HERO -->
+  <section class="section gallery-hero">
+    <img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=1400&q=70&fm=webp&fit=crop&crop=center" alt="" width="1400" height="700" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;z-index:0;">
+    <div class="wrap">
+      <span class="eyebrow" style="justify-content:center;">Across all three campuses</span>
+      <h1>A season's worth of mornings, drills and match days</h1>
+    </div>
+  </section>
+
+  <!-- 2 & 3. FILTER CHIPS + MASONRY GRID with lightbox -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="filter-row" data-reveal>
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="athletics">Athletics</button>
+        <button class="chip" data-filter="football">Football</button>
+        <button class="chip" data-filter="cricket">Cricket</button>
+        <button class="chip" data-filter="swimming">Swimming</button>
+        <button class="chip" data-filter="basketball">Basketball</button>
+      </div>
+      <div class="masonry" id="masonryGrid" data-reveal>
+        <div class="masonry-item span2" data-cat="athletics"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="Athletics training session" loading="lazy"><span class="tag">Athletics</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="football"><img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=70&fm=webp&fit=crop" alt="Football drill on turf" loading="lazy"><span class="tag">Football</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="cricket"><img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=600&q=70&fm=webp&fit=crop" alt="Cricket net practice" loading="lazy"><span class="tag">Cricket</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item wide2" data-cat="swimming"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="Swimming lane training" loading="lazy"><span class="tag">Swimming</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="basketball"><img src="https://images.unsplash.com/photo-1546519638405-a2c5e1b2d634?w=600&q=70&fm=webp&fit=crop" alt="Basketball court drills" loading="lazy"><span class="tag">Basketball</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item span2" data-cat="football"><img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=600&q=70&fm=webp&fit=crop" alt="Football match day" loading="lazy"><span class="tag">Football</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="athletics"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70&fm=webp&fit=crop" alt="Sprint technique session" loading="lazy"><span class="tag">Athletics</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="cricket"><img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=600&q=70&fm=webp&fit=crop&crop=top" alt="Cricket fielding drill" loading="lazy"><span class="tag">Cricket</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="swimming"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop&crop=top" alt="Swimming stroke correction" loading="lazy"><span class="tag">Swimming</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="basketball"><img src="https://images.unsplash.com/photo-1546519638405-a2c5e1b2d634?w=600&q=70&fm=webp&fit=crop&crop=top" alt="Basketball footwork drill" loading="lazy"><span class="tag">Basketball</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="athletics"><img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=70&fm=webp&fit=crop" alt="Relay handoff practice" loading="lazy"><span class="tag">Athletics</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+        <div class="masonry-item" data-cat="cricket"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=70&fm=webp&fit=crop" alt="Cricket batting practice" loading="lazy"><span class="tag">Cricket</span><span class="zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- lightbox markup -->
+  <div class="lightbox" id="lightbox" data-open="false" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    <span class="lightbox-caption" id="lightboxCaption"></span>
+  </div>
+
+  <!-- 4. SEASON HIGHLIGHTS — auto-scroll carousel -->
+  <section class="section section--cream-dim">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">2025–26 season</span>
+        <h2>Highlights from the year</h2>
+      </div>
+    </div>
+    <div class="highlight-rail-wrap">
+      <div class="highlight-rail">
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="District athletics meet" loading="lazy"><div class="highlight-card-body"><h4>District athletics meet</h4><span>March 2025</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="U-14 football district final" loading="lazy"><div class="highlight-card-body"><h4>U-14 football final</h4><span>August 2025</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop&crop=top" alt="Inter-academy swim meet" loading="lazy"><div class="highlight-card-body"><h4>Inter-academy swim meet</h4><span>November 2025</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=600&q=70&fm=webp&fit=crop" alt="State selection trials" loading="lazy"><div class="highlight-card-body"><h4>State selection trials</h4><span>January 2026</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=70&fm=webp&fit=crop" alt="Annual sports day" loading="lazy"><div class="highlight-card-body"><h4>Annual sports day</h4><span>February 2026</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="District athletics meet" loading="lazy"><div class="highlight-card-body"><h4>District athletics meet</h4><span>March 2025</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="U-14 football district final" loading="lazy"><div class="highlight-card-body"><h4>U-14 football final</h4><span>August 2025</span></div></article>
+        <article class="highlight-card"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop&crop=top" alt="Inter-academy swim meet" loading="lazy"><div class="highlight-card-body"><h4>Inter-academy swim meet</h4><span>November 2025</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BEFORE/AFTER — drag compare -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head" data-reveal style="text-align:center; margin-inline:auto; align-items:center;">
+        <span class="eyebrow" style="justify-content:center;">Term one to term three</span>
+        <h2>What an assessment-led term actually changes</h2>
+      </div>
+      <div class="compare-wrap" id="compareWrap" data-reveal>
+        <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=640&q=70&fm=webp&fit=crop" alt="Training intensity at term start" class="compare-before">
+        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="Training intensity at term end" class="compare-after" id="compareAfter">
+        <div class="compare-handle" id="compareHandle"></div>
+        <span class="compare-label cl-before">Week 1</span>
+        <span class="compare-label cl-after">Week 12</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CAMPUS MAP CALLOUT -->
+  <section class="section section--cream-dim">
+    <div class="wrap">
+      <div class="campus-feature">
+        <div class="campus-art" data-reveal style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=600&q=70&fm=webp&fit=crop" alt="Stylised layout of the Hebbal Grounds campus" width="600" height="400" loading="lazy">
+          <span class="campus-pin" style="top:42%; left:58%;" aria-hidden="true"></span>
+        </div>
+        <div>
+          <span class="eyebrow">Hebbal Grounds campus</span>
+          <h2 style="margin-block:0.4em;">Our largest training site</h2>
+          <p class="lede">Eleven acres holding the turf pitch, athletics track, swim pool and indoor S&amp;C hall under one campus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. STAT CALLOUTS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="stat-strip" data-reveal>
+        <div class="stat-strip-item"><strong>3</strong><span>Campuses photographed</span></div>
+        <div class="stat-strip-item"><strong>40+</strong><span>Sessions covered this term</span></div>
+        <div class="stat-strip-item"><strong>6</strong><span>Match days this season</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. VIDEO PLACEHOLDER CARDS -->
+  <section class="section section--cream-dim">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Watch</span>
+        <h2>Short clips from recent sessions</h2>
+      </div>
+      <div class="video-grid">
+        <a href="#" class="video-card" data-reveal aria-label="Play: Sprint start technique breakdown">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy">
+          <div class="video-play"><span class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="video-card-label">Sprint start breakdown</span>
+        </a>
+        <a href="#" class="video-card" data-reveal aria-label="Play: Football set-piece routine">
+          <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy">
+          <div class="video-play"><span class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="video-card-label">Football set-piece routine</span>
+        </a>
+        <a href="#" class="video-card" data-reveal aria-label="Play: Freestyle stroke correction">
+          <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop&crop=top" alt="" loading="lazy">
+          <div class="video-play"><span class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="video-card-label">Freestyle stroke correction</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. STORY ROWS -->
+  <section class="section">
+    <div class="wrap" style="display:flex; flex-direction:column; gap: var(--gap-xl);">
+      <div class="story-row" data-reveal>
+        <div class="story-img"><img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=600&q=70&fm=webp&fit=crop" alt="Cricket net session" loading="lazy"></div>
+        <div class="story-text"><span class="story-num">01</span><h3 style="margin-top:0.3em;">Net sessions run six days a week</h3><p class="lede" style="margin-top:0.5em;">Rotated by discipline so no athlete spends a whole week only batting or only bowling.</p></div>
+      </div>
+      <div class="story-row rev" data-reveal>
+        <div class="story-img"><img src="https://images.unsplash.com/photo-1546519638405-a2c5e1b2d634?w=600&q=70&fm=webp&fit=crop" alt="Basketball drill session" loading="lazy"></div>
+        <div class="story-text"><span class="story-num">02</span><h3 style="margin-top:0.3em;">Footwork drills come before scrimmage</h3><p class="lede" style="margin-top:0.5em;">Younger basketball batches don't touch full-court play until footwork checks are passed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. SOCIAL STRIP -->
+  <section class="section section--cream-dim">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">@stacklysports</span>
+        <h2>Recent posts</h2>
+      </div>
+      <div class="social-strip" data-reveal>
+        <a href="#" class="social-tile"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy"></a>
+        <a href="#" class="social-tile"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy"></a>
+        <a href="#" class="social-tile"><img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy"></a>
+        <a href="#" class="social-tile"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop&crop=top" alt="" loading="lazy"></a>
+        <a href="#" class="social-tile"><img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=70&fm=webp&fit=crop" alt="" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. SUBMIT YOUR PHOTOS STRIP -->
+  <section class="submit-strip section--tight">
+    <div class="wrap">
+      <h3>Got a good shot from match day?</h3>
+      <p class="lede" style="color:var(--cream-dim); margin-inline:auto; margin-top:0.5em;">Parents can submit photos for the next gallery update — we credit every contributor.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:var(--gap-m); opacity:1;">
+        <a href="contact.html" class="btn btn-gold">Submit a photo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. CTA -->
+  <section class="section programs-cta">
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--gold-soft);">Come see it yourself</span>
+      <h2 style="margin-block:0.5em;">Photos only tell half of it</h2>
+      <p class="lede" style="margin-inline:auto; color:var(--cream-dim);">A Saturday trial session is the fastest way to see how a campus actually runs.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:var(--gap-l); opacity:1;">
+        <a href="contact.html" class="btn btn-gold">Book a free trial session</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="footer-logo" width="130" height="52" loading="lazy">
+        <p class="footer-tagline">Coaching athletes from first sprint to first selection trial, on three campuses across the city.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="coaches.html">Coaches</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Admissions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Campuses</h4>
+        <ul>
+          <li><a href="contact.html">Hebbal Grounds</a></li>
+          <li><a href="contact.html">Vidyaranyapura Turf</a></li>
+          <li><a href="contact.html">Yelahanka Track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Reach the front desk</h4>
+        <ul>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><a href="mailto:hello@stacklysports.in">hello@stacklysports.in</a></li>
+          <li>6:00am – 8:30pm, all week</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-year></span> Stackly Sports Academy. All rights reserved.</span>
+      <div class="footer-socials" aria-label="Social links">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="gallery.js"></script>
+</body>
+</html>

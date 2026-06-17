@@ -1,0 +1,179 @@
+/* ============================================================
+   COACHES PAGE — section-specific styles & animations
+   ============================================================ */
+
+/* ---------- 1. HERO BAND ---------- */
+.coach-hero{
+  padding-top: calc(78px + var(--gap-l));
+  padding-bottom: var(--gap-xl);
+  background: var(--field-deep);
+  position: relative;
+  overflow: hidden;
+}
+.coach-hero-bg{
+  position:absolute; inset:0;
+  overflow:hidden;
+}
+.coach-hero-bg img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;
+}
+.coach-hero .wrap{ position:relative; z-index:2; }
+.coach-hero h1{ color: var(--cream); max-width:20ch; }
+.coach-hero .eyebrow{ color: var(--gold-soft); }
+.coach-hero .eyebrow::before{ background: var(--gold-soft); }
+.coach-hero .lede{ color: var(--cream-dim); margin-top:0.8em; }
+
+/* ---------- 2. PHILOSOPHY — typewriter-ish line draw ---------- */
+.philosophy{ text-align:center; padding-block: var(--gap-l); }
+.philosophy blockquote{
+  font-family: var(--f-display); font-size: var(--step3); line-height:1.25;
+  color: var(--field-deep); max-width: 26ch; margin-inline:auto;
+  text-transform: uppercase;
+}
+.philosophy .underline-grow{
+  display:block; height:3px; width:0; background: var(--gold);
+  margin: var(--gap-s) auto 0; transition: width 1s var(--ease-out);
+}
+.philosophy.is-visible .underline-grow{ width:120px; }
+.philosophy cite{ display:block; margin-top: var(--gap-s); font-family: var(--f-mono); font-style:normal; font-size:0.85rem; color: var(--ink-soft); }
+
+/* ---------- 3. STAFF GRID — hover-reveal info panel ---------- */
+.staff-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--gap-m); }
+.staff-card{
+  position:relative; overflow:hidden; aspect-ratio: 4/5;
+  background: var(--field);
+}
+.staff-card img{ width:100%; height:100%; object-fit:cover; transition: transform .5s var(--ease-out); }
+.staff-card:hover img{ transform: scale(1.06); }
+.staff-info{
+  position:absolute; left:0; right:0; bottom:0;
+  background: linear-gradient(to top, rgba(15,46,31,0.95), rgba(15,46,31,0));
+  padding: var(--gap-m) var(--gap-s) var(--gap-s);
+  transform: translateY(8px);
+  transition: transform .4s var(--ease-out);
+}
+.staff-info h3{ color: var(--cream); font-size:1.15rem; }
+.staff-info span{ font-family: var(--f-mono); font-size:0.75rem; color: var(--gold-soft); display:block; margin-top:0.2em; }
+.staff-info p{
+  color: var(--cream-dim); font-size:0.85rem; margin-top:0.6em;
+  max-height:0; opacity:0; overflow:hidden;
+  transition: max-height .4s var(--ease-out), opacity .3s;
+}
+.staff-card:hover .staff-info p, .staff-card:focus-within .staff-info p{ max-height:80px; opacity:1; }
+
+/* ---------- 4. CERTIFICATIONS STRIP — looping scroll ---------- */
+.cert-strip{ background: var(--cream-dim); overflow:hidden; padding-block: 1.6rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.cert-track{ display:flex; gap: var(--gap-l); width:max-content; animation: certScroll 32s linear infinite; }
+.cert-strip:hover .cert-track{ animation-play-state: paused; }
+@keyframes certScroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+.cert-item{ font-family: var(--f-display); text-transform:uppercase; font-size:0.95rem; color: var(--ink-soft); letter-spacing:0.03em; white-space:nowrap; display:flex; align-items:center; gap:0.6em; }
+.cert-item::before{ content:"★"; color: var(--gold-deep); font-size:0.8em; }
+
+/* ---------- 5. HEAD COACH SPOTLIGHT — large editorial split ---------- */
+.spotlight{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--gap-l); align-items:center; }
+.spotlight-art{ position:relative; }
+.spotlight-art img{ width:100%; aspect-ratio:5/6; object-fit:cover; }
+.spotlight-frame{
+  position:absolute; inset: 18px -18px -18px 18px;
+  border: 2px solid var(--gold); z-index:-1;
+  opacity:0; transition: opacity .6s var(--ease-out) .2s;
+}
+.spotlight-art.is-visible .spotlight-frame{ opacity:1; }
+.spotlight-copy .eyebrow{ margin-bottom:0.6em; }
+.spotlight-copy h2{ margin-bottom:0.5em; }
+.spotlight-quote{ font-style:normal; color: var(--ink-soft); font-size: var(--step1); margin-block: var(--gap-s); border-left: 3px solid var(--gold); padding-left: 1em; }
+
+/* ---------- 6. HIRING CRITERIA — animated checklist ---------- */
+.criteria-list{ display:flex; flex-direction:column; gap: var(--gap-s); max-width: 640px; }
+.criteria-item{
+  display:flex; gap: var(--gap-s); align-items:flex-start;
+  opacity:0; transform: translateX(-20px);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+}
+.criteria-item.is-visible{ opacity:1; transform:translateX(0); }
+.criteria-check{
+  width:28px; height:28px; border-radius:50%; border:2px solid var(--gold-deep); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; margin-top:2px;
+}
+.criteria-check svg{ width:14px; height:14px; stroke: var(--gold-deep); stroke-width:3; fill:none; stroke-dasharray: 20; stroke-dashoffset:20; transition: stroke-dashoffset .5s var(--ease-out) .3s; }
+.criteria-item.is-visible .criteria-check svg{ stroke-dashoffset:0; }
+.criteria-item h4{ font-family: var(--f-display); text-transform:uppercase; font-size:1rem; color: var(--field-deep); }
+.criteria-item p{ color: var(--ink-soft); font-size:0.92rem; margin-top:0.2em; }
+
+/* ---------- 7. COACH TESTIMONIAL — large pull quote with marks ---------- */
+.coach-quote-block{ position:relative; text-align:center; padding-block: var(--gap-l); }
+.coach-quote-block .mark{
+  position:absolute; font-family: var(--f-display); font-size: 8rem; color: var(--gold-soft);
+  opacity:0.4; line-height:1;
+}
+.coach-quote-block .mark.left{ top:-10px; left: calc(50% - 320px); }
+.coach-quote-block .mark.right{ bottom:-60px; right: calc(50% - 320px); transform: rotate(180deg); }
+.coach-quote-block p{ font-family: var(--f-body); font-size: var(--step2); max-width: 50ch; margin-inline:auto; color: var(--field-deep); font-style: italic; }
+.coach-quote-block span{ display:block; margin-top: var(--gap-s); font-family: var(--f-mono); font-size:0.85rem; color: var(--gold-deep); }
+
+/* ---------- 8. TENURE STATS — animated bars (vertical) ---------- */
+.tenure-row{ display:flex; align-items:flex-end; gap: var(--gap-m); height: 220px; justify-content:center; }
+.tenure-bar-wrap{ display:flex; flex-direction:column; align-items:center; gap:0.6em; height:100%; justify-content:flex-end; }
+.tenure-bar{
+  width: 46px; background: linear-gradient(to top, var(--field-deep), var(--field-soft));
+  height:0; transition: height 1s var(--ease-out);
+  position:relative;
+}
+.tenure-bar::after{ content: attr(data-val); position:absolute; top:-26px; left:50%; transform:translateX(-50%); font-family: var(--f-mono); font-size:0.78rem; color: var(--field-deep); }
+.tenure-row.is-visible .tenure-bar{ height: var(--h); }
+.tenure-bar-wrap span{ font-family: var(--f-mono); font-size:0.72rem; color: var(--ink-soft); text-align:center; }
+
+/* ---------- 9. DEPARTMENTS — interactive donut-style segmented bar ---------- */
+.dept-bar{ display:flex; height: 46px; border-radius: 6px; overflow:hidden; width:100%; }
+.dept-seg{ height:100%; transition: filter .25s; position:relative; }
+.dept-seg:hover{ filter: brightness(1.12); }
+.dept-seg .tip{
+  position:absolute; bottom: calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(6px);
+  background: var(--field-deep); color: var(--cream); padding: 0.4em 0.7em; border-radius:4px;
+  font-family: var(--f-mono); font-size:0.72rem; white-space:nowrap; opacity:0; pointer-events:none;
+  transition: opacity .2s, transform .2s;
+}
+.dept-seg:hover .tip{ opacity:1; transform:translateX(-50%) translateY(0); }
+.dept-legend{ display:flex; gap: var(--gap-m); flex-wrap:wrap; margin-top: var(--gap-s); }
+.dept-legend-item{ display:flex; align-items:center; gap:0.5em; font-family: var(--f-mono); font-size:0.78rem; color: var(--ink-soft); }
+.dept-legend-dot{ width:10px; height:10px; border-radius:50%; }
+
+/* ---------- 10. OPEN POSITIONS — list with slide-in arrow ---------- */
+.position-list{ display:flex; flex-direction:column; }
+.position-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 1.3rem 0; border-bottom: 1px solid var(--line);
+}
+.position-row h4{ font-family: var(--f-display); text-transform:uppercase; font-size:1.05rem; color: var(--field-deep); }
+.position-row span{ font-family: var(--f-mono); font-size:0.78rem; color: var(--ink-soft); }
+.position-arrow{
+  width: 38px; height:38px; border-radius:50%; border: 1.5px solid var(--gold-deep);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition: background .3s, transform .3s;
+}
+.position-arrow svg{ width:16px; height:16px; stroke: var(--gold-deep); transition: stroke .3s, transform .3s; }
+.position-row:hover .position-arrow{ background: var(--gold-deep); transform: rotate(45deg); }
+.position-row:hover .position-arrow svg{ stroke: var(--cream); }
+
+/* ---------- 11. JOIN CTA banner — sliding gradient text bg ---------- */
+.join-banner{
+  background: linear-gradient(120deg, var(--field), var(--field-deep), var(--field));
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  color: var(--cream); text-align:center; padding-block: var(--gap-l);
+}
+@keyframes gradientShift{ 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
+.join-banner h3{ color: var(--cream); font-size: var(--step2); }
+
+/* ---------- 12. FINAL CTA shared style reused from programs ---------- */
+
+@media (max-width: 980px){
+  .staff-grid{ grid-template-columns: repeat(2,1fr); }
+  .spotlight{ grid-template-columns:1fr; }
+  .tenure-row{ flex-wrap:wrap; height:auto; }
+}
+@media (max-width: 640px){
+  .staff-grid{ grid-template-columns: 1fr 1fr; gap: var(--gap-s); }
+  .coach-quote-block .mark{ display:none; }
+  .position-row{ flex-wrap:wrap; gap:0.5em; }
+}
