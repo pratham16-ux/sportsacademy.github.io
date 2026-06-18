@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach dashboard — Stackly Sports Academy</title>
+<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body data-role="coach">
+<a class="skip-link" href="#dashBody">Skip to content</a>
+
+<div class="dash">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-side" id="dashSide">
+    <div class="dash-side-top">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="dash-logo brand-mark" width="100" height="40">
+      <span class="dash-side-role">Coach portal</span>
+    </div>
+
+    <nav class="dash-nav" aria-label="Coach sections">
+      <span class="dash-nav-label">Main</span>
+      <button class="dash-nav-btn is-active" data-panel="overview">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="dash-nav-btn" data-panel="roster">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 20a5 5 0 0 1 5-3"/></svg>
+        Squad roster
+        <span class="dash-nav-badge" id="navRoster">0</span>
+      </button>
+      <button class="dash-nav-btn" data-panel="sessions">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Sessions
+      </button>
+      <button class="dash-nav-btn" data-panel="attendance">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Mark attendance
+      </button>
+
+      <span class="dash-nav-label">Communicate</span>
+      <button class="dash-nav-btn" data-panel="messages">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messages
+      </button>
+      <button class="dash-nav-btn" data-panel="profile">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Profile
+      </button>
+    </nav>
+
+    <div class="dash-side-foot">
+      <button class="btn btn-sm dash-logout" id="logoutBtn">Sign out</button>
+    </div>
+  </aside>
+
+  <div class="dash-scrim" id="dashScrim"></div>
+
+  <!-- MAIN -->
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <div class="dash-topbar-left">
+        <button class="dash-burger" id="dashBurger" aria-label="Open menu">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <span class="dash-page-title" id="pageTitle">Overview</span>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-account">
+          <div class="dash-account-meta">
+            <span class="dash-account-name" id="acctName">Coach</span>
+            <span class="dash-account-email" id="acctEmail">—</span>
+          </div>
+          <div class="dash-avatar" id="acctAvatar">C</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-body" id="dashBody">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="panel is-active" data-panel="overview">
+        <div class="dash-welcome">
+          <div>
+            <h2 id="welcomeName">Welcome back</h2>
+            <p>Your athletics squad and today's sessions.</p>
+            <span class="logged-as">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+              Signed in as <strong id="welcomeEmail" style="color:var(--cream);margin-left:0.3em;">—</strong>
+            </span>
+          </div>
+          <div class="dash-welcome-stat">
+            <strong id="ovSquadSize">12</strong>
+            <span>Athletes in your squad</span>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="statcard"><div class="s-label">Discipline</div><div class="s-val" style="font-size:1.5rem;">Athletics</div><div class="s-foot">U-16 &amp; Senior</div></div>
+          <div class="statcard"><div class="s-label">Sessions this week</div><div class="s-val" id="ovWeekSessions">6</div><div class="s-foot">3 training locations</div></div>
+          <div class="statcard"><div class="s-label">Avg. attendance</div><div class="s-val" id="ovAvgAtt">86%</div><div class="s-foot">Last 30 days</div></div>
+          <div class="statcard"><div class="s-label">Trials pending</div><div class="s-val">3</div><div class="s-foot">Review this week</div></div>
+        </div>
+
+        <div class="card-2col">
+          <div class="card">
+            <h4>Today's sessions</h4>
+            <div class="row-list" id="ovTodayList">
+              <div class="list-row">
+                <span class="list-when">6:00am</span>
+                <div class="list-main"><strong>Acceleration block</strong><span>Hebbal Grounds</span></div>
+                <div class="list-action"><span class="pill pill-gold">Today</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h4>Athletes to watch</h4>
+            <div class="row-list" id="ovWatchList">
+              <div class="list-row">
+                <div class="list-main"><strong>Vihaan Mehta</strong><span>U-16 · rating 6.9</span></div>
+                <div class="list-action"><span class="pill pill-red">72% present</span></div>
+              </div>
+              <div class="list-row">
+                <div class="list-main"><strong>Arjun Verma</strong><span>U-16 · rating 7.1</span></div>
+                <div class="list-action"><span class="pill pill-red">76% present</span></div>
+              </div>
+              <div class="list-row">
+                <div class="list-main"><strong>Kabir Reddy</strong><span>Senior · rating 8.4</span></div>
+                <div class="list-action"><span class="pill pill-red">79% present</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ROSTER ===== -->
+      <section class="panel" data-panel="roster">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Your athletes</span>
+            <h3>Squad roster</h3>
+          </div>
+          <div class="dash-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="search" id="rosterSearch" placeholder="Search athletes…">
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Add an athlete</h4>
+          <form id="addAthleteForm">
+            <div class="d-row">
+              <div class="d-field"><label for="aa-name">Name</label><input type="text" id="aa-name" placeholder="Full name"></div>
+              <div class="d-field"><label for="aa-batch">Batch</label><select id="aa-batch"><option>U-16</option><option>Senior</option><option>U-14</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Add to squad</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <table class="dtable">
+            <thead><tr><th>Athlete</th><th>Batch</th><th>Attendance</th><th>Rating</th><th></th></tr></thead>
+            <tbody id="rosterTable">
+              <tr><td class="name-cell">Aarav Nair</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-green">94%</span></td><td>8.1</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Diya Sharma</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-gold">88%</span></td><td>7.6</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Kabir Reddy</td><td><span class="pill pill-grey">Senior</span></td><td><span class="pill pill-red">79%</span></td><td>8.4</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Ishaan Gupta</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-green">91%</span></td><td>7.2</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Ananya Rao</td><td><span class="pill pill-grey">Senior</span></td><td><span class="pill pill-green">96%</span></td><td>8.8</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Vihaan Mehta</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-red">72%</span></td><td>6.9</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Saanvi Iyer</td><td><span class="pill pill-grey">Senior</span></td><td><span class="pill pill-gold">85%</span></td><td>7.9</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Rohan Pillai</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-green">90%</span></td><td>7.4</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Meera Joshi</td><td><span class="pill pill-grey">Senior</span></td><td><span class="pill pill-gold">83%</span></td><td>8.0</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Arjun Verma</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-red">76%</span></td><td>7.1</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Tara Menon</td><td><span class="pill pill-grey">Senior</span></td><td><span class="pill pill-green">98%</span></td><td>9.0</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+              <tr><td class="name-cell">Dev Patel</td><td><span class="pill pill-grey">U-16</span></td><td><span class="pill pill-gold">81%</span></td><td>7.5</td><td><button class="btn btn-ghost btn-sm">Remove</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== SESSIONS ===== -->
+      <section class="panel" data-panel="sessions">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Planning</span>
+            <h3>Training sessions</h3>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Schedule a session</h4>
+          <form id="addSessionForm">
+            <div class="d-row">
+              <div class="d-field"><label for="se-title">Focus</label><input type="text" id="se-title" placeholder="e.g. Acceleration block"></div>
+              <div class="d-field"><label for="se-day">Day</label><select id="se-day"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option><option>Sun</option></select></div>
+            </div>
+            <div class="d-row">
+              <div class="d-field"><label for="se-time">Time</label><input type="time" id="se-time" value="06:00"></div>
+              <div class="d-field"><label for="se-loc">Location</label><select id="se-loc"><option>Hebbal Grounds</option><option>Vidyaranyapura Turf</option><option>Yelahanka Track</option><option>S&amp;C Lab</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Add session</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="row-list" id="sessionList">
+            <div class="list-row">
+              <span class="list-when">Mon · 6:00am</span>
+              <div class="list-main"><strong>Acceleration block</strong><span>Hebbal Grounds</span></div>
+              <div class="list-action"><span class="pill pill-gold" style="margin-right:0.6em;">Today</span><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Tue · 5:30pm</span>
+              <div class="list-main"><strong>Recovery &amp; mobility</strong><span>S&amp;C Lab</span></div>
+              <div class="list-action"><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Wed · 6:00am</span>
+              <div class="list-main"><strong>Speed endurance</strong><span>Hebbal Grounds</span></div>
+              <div class="list-action"><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Fri · 6:00am</span>
+              <div class="list-main"><strong>Strength &amp; conditioning</strong><span>S&amp;C Lab</span></div>
+              <div class="list-action"><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Sat · 7:00am</span>
+              <div class="list-main"><strong>Technique review (filmed)</strong><span>Hebbal Grounds</span></div>
+              <div class="list-action"><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Sun · 7:30am</span>
+              <div class="list-main"><strong>Time trial — 150m × 4</strong><span>Yelahanka Track</span></div>
+              <div class="list-action"><button class="btn btn-ghost btn-sm">Cancel</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ATTENDANCE ===== -->
+      <section class="panel" data-panel="attendance">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Today's session</span>
+            <h3>Mark attendance</h3>
+          </div>
+          <button class="btn btn-gold btn-sm" id="saveAttBtn">Save attendance</button>
+        </div>
+        <div class="card">
+          <table class="dtable">
+            <thead><tr><th>Athlete</th><th>Batch</th><th style="text-align:right;">Status</th></tr></thead>
+            <tbody id="markAttTable">
+              <tr><td class="name-cell">Aarav Nair</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Diya Sharma</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Kabir Reddy</td><td><span class="pill pill-grey">Senior</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Ishaan Gupta</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Ananya Rao</td><td><span class="pill pill-grey">Senior</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Vihaan Mehta</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Saanvi Iyer</td><td><span class="pill pill-grey">Senior</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Rohan Pillai</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Meera Joshi</td><td><span class="pill pill-grey">Senior</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Arjun Verma</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Tara Menon</td><td><span class="pill pill-grey">Senior</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+              <tr><td class="name-cell">Dev Patel</td><td><span class="pill pill-grey">U-16</span></td><td style="text-align:right;"><span class="att-toggle"><button type="button" data-val="present" class="is-on">Present</button><button type="button" data-val="absent" class="">Absent</button></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== MESSAGES ===== -->
+      <section class="panel" data-panel="messages">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Squad broadcast</span>
+            <h3>Messages</h3>
+          </div>
+        </div>
+        <div class="card-2col">
+          <div class="card">
+            <h4>Send to squad</h4>
+            <form id="msgForm">
+              <div class="d-field">
+                <label for="msg-to">Recipients</label>
+                <select id="msg-to"><option value="all">Whole squad</option><option value="U-16">U-16 batch</option><option value="Senior">Senior batch</option></select>
+              </div>
+              <div class="d-field"><label for="msg-body">Message</label><textarea id="msg-body" placeholder="e.g. Saturday session moved to 7:30am due to ground booking."></textarea></div>
+              <button type="submit" class="btn btn-primary btn-sm">Send message</button>
+            </form>
+          </div>
+          <div class="card">
+            <h4>Sent</h4>
+            <div class="row-list" id="msgList">
+              <div class="list-row">
+                <div class="list-main"><strong>To: Whole squad</strong><span>Saturday session moves to 7:30am this week — ground booking clash. Be there for the warm-up.</span></div>
+                <div class="list-action"><span class="pill pill-green">Sent</span></div>
+              </div>
+              <div class="list-row">
+                <div class="list-main"><strong>To: U-16 batch</strong><span>Bring spikes for Wednesday, we are on the track and not the grass.</span></div>
+                <div class="list-action"><span class="pill pill-green">Sent</span></div>
+              </div>
+              <div class="list-row">
+                <div class="list-main"><strong>To: Senior batch</strong><span>Sunday's time-trial splits are up on the board. Strong back straight, Tara — nice work.</span></div>
+                <div class="list-action"><span class="pill pill-green">Sent</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section class="panel" data-panel="profile">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Your details</span>
+            <h3>Coach profile</h3>
+          </div>
+        </div>
+        <div class="card" style="max-width:620px;">
+          <form id="profileForm">
+            <div class="d-row">
+              <div class="d-field"><label for="pf-name">Full name</label><input type="text" id="pf-name"></div>
+              <div class="d-field"><label for="pf-email">Email</label><input type="email" id="pf-email" readonly></div>
+            </div>
+            <div class="d-row">
+              <div class="d-field"><label for="pf-phone">Phone</label><input type="tel" id="pf-phone" value="+91 98765 12340"></div>
+              <div class="d-field">
+                <label for="pf-discipline">Discipline</label>
+                <select id="pf-discipline"><option>Athletics</option><option>Football</option><option>Cricket</option><option>Swimming</option><option>Basketball</option></select>
+              </div>
+            </div>
+            <div class="d-row">
+              <div class="d-field"><label for="pf-cert">Certification</label><input type="text" id="pf-cert" value="NIS Level 2 · Athletics"></div>
+              <div class="d-field"><label for="pf-since">Coaching since</label><input type="text" id="pf-since" value="2018"></div>
+            </div>
+            <div class="d-field"><label for="pf-bio">Short bio</label><textarea id="pf-bio">Former state-level 400m runner. Specialises in sprint mechanics and block starts for the U-16 and senior squads.</textarea></div>
+            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="dashboard-common.js"></script>
+<script src="coach-dashboard.js"></script>
+</body>
+</html>

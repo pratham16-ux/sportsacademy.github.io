@@ -10,6 +10,42 @@
 <link rel="stylesheet" href="base.css">
 <link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="home.css">
+<style>
+  
+  .method-layout{
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--gap-l);
+    align-items: start;
+  }
+  .method-visual{
+    position: sticky;
+    top: 100px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .method-visual img{
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+  .method-visual figcaption{
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(15,46,31,0.92), transparent);
+    color: var(--cream);
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 2.5rem 1rem 0.9rem;
+  }
+  @media (max-width: 900px){
+    .method-layout{ grid-template-columns: 1fr; }
+    .method-visual{ position: static; }
+    .method-visual img{ aspect-ratio: 16 / 9; }
+  }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -28,8 +64,8 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="contact.html" class="btn btn-ghost">Book a trial</a>
-        <a href="contact.html" class="btn btn-primary">Enrol now</a>
+       
+        <a href="signin.html" class="btn btn-primary">Sign in</a>
       </div>
     </nav>
     <button class="hamburger" aria-expanded="false" aria-label="Open menu" aria-controls="mobileDrawer">
@@ -45,6 +81,7 @@
 <div class="mobile-drawer" id="mobileDrawer" data-open="false">
   <div class="drawer-backdrop"></div>
   <nav class="drawer-panel" aria-label="Mobile">
+    <button class="drawer-close" type="button" aria-label="Close menu"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <ul class="drawer-links">
       <li><a href="index.html" aria-current="page"><span>Home</span><span class="num">01</span></a></li>
       <li><a href="programs.html"><span>Programs</span><span class="num">02</span></a></li>
@@ -53,10 +90,11 @@
       <li><a href="contact.html"><span>Contact</span><span class="num">05</span></a></li>
     </ul>
     <div class="drawer-foot">
-      <a href="contact.html" class="btn btn-gold">Book a free trial session</a>
+    
+      <a href="signin.html" class="btn btn-ghost" style="border-color:var(--cream-dim);color:var(--cream);">Sign in</a>
       <div class="drawer-contact">
         <span>Open daily · 6:00am – 8:30pm</span>
-        <a href="tel:+919876543210">+91 98765 43210</a>
+        <a href="404.html">+91 98765 43210</a>
       </div>
     </div>
   </nav>
@@ -67,7 +105,7 @@
   <!-- 1. HERO — staggered word reveal + drift -->
   <section class="hero">
     <div class="hero-art" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1400&q=70&fm=webp&fit=crop&crop=center" alt="" width="1400" height="900" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <img src="/pic/run.webp" alt="" width="1400" height="900" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.9;">
     </div>
     <div class="hero-inner">
       <span class="eyebrow hero-eyebrow">Admissions open · Batch starts July</span>
@@ -120,7 +158,7 @@
       </div>
       <div class="progrid">
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70&fm=webp&fit=crop" alt="Athletics training" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/run.webp" alt="Athletics training" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Athletics</h3>
             <p>Sprints, middle distance and field events, with video-reviewed technique sessions every Saturday.</p>
@@ -128,7 +166,7 @@
           </div>
         </article>
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=70&fm=webp&fit=crop" alt="Football training" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/football (1).webp" alt="Football training" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Football</h3>
             <p>Age-grouped squads with weekend match-play against partner academies across the city.</p>
@@ -136,7 +174,7 @@
           </div>
         </article>
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=600&q=70&fm=webp&fit=crop" alt="Cricket practice" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/crickett.webp" alt="Cricket practice" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Cricket</h3>
             <p>Net sessions split by discipline — batting, pace, and spin — under dedicated specialist coaches.</p>
@@ -144,7 +182,7 @@
           </div>
         </article>
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="Swimming training" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/swimmer.webp" alt="Swimming training" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Swimming</h3>
             <p>Stroke correction and endurance sets in a temperature-controlled pool, taught in small lane groups.</p>
@@ -152,7 +190,7 @@
           </div>
         </article>
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1546519638405-a2c5e1b2d634?w=600&q=70&fm=webp&fit=crop" alt="Basketball drills" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/basket-ball.webp" alt="Basketball drills" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Basketball</h3>
             <p>Half-court drills building to full 5-on-5 league play once footwork fundamentals are locked in.</p>
@@ -160,7 +198,7 @@
           </div>
         </article>
         <article class="procard" data-reveal>
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=70&fm=webp&fit=crop" alt="Strength and conditioning" class="procard-img" width="600" height="338" loading="lazy">
+          <img src="/pic/gym-ringan-modern-peralgym.webp" alt="Strength and conditioning" class="procard-img" width="600" height="338" loading="lazy">
           <div class="procard-body">
             <h3>Strength &amp; conditioning</h3>
             <p>A shared S&amp;C block every athlete passes through, regardless of their primary sport.</p>
@@ -178,35 +216,41 @@
         <span class="eyebrow">How training is structured</span>
         <h2>The Stackly method</h2>
       </div>
-      <div class="method-row">
-        <div class="method-line-col" aria-hidden="true">
-          <svg width="2" height="100%" viewBox="0 0 2 600" preserveAspectRatio="none" style="height:600px;">
-            <line x1="1" y1="0" x2="1" y2="600" stroke="var(--line)" stroke-width="2"/>
-            <line id="methodTraceLine" x1="1" y1="0" x2="1" y2="600" stroke="var(--gold-deep)" stroke-width="2" class="method-path"/>
-          </svg>
+      <div class="method-layout">
+        <div class="method-row">
+          <div class="method-line-col" aria-hidden="true">
+            <svg width="2" height="100%" viewBox="0 0 2 600" preserveAspectRatio="none" style="height:600px;">
+              <line x1="1" y1="0" x2="1" y2="600" stroke="var(--line)" stroke-width="2"/>
+              <line id="methodTraceLine" x1="1" y1="0" x2="1" y2="600" stroke="var(--gold-deep)" stroke-width="2" class="method-path"/>
+            </svg>
+          </div>
+          <div class="method-steps">
+            <div class="method-step" data-reveal>
+              <span class="step-num">Stage 1</span>
+              <h3>Assessment week</h3>
+              <p>Every new athlete is benchmarked on speed, mobility and sport-specific skill before being placed in a batch — never by age alone.</p>
+            </div>
+            <div class="method-step" data-reveal>
+              <span class="step-num">Stage 2</span>
+              <h3>Foundation block</h3>
+              <p>Eight weeks on movement fundamentals and conditioning, run alongside light sport-specific drilling.</p>
+            </div>
+            <div class="method-step" data-reveal>
+              <span class="step-num">Stage 3</span>
+              <h3>Skill progression</h3>
+              <p>Technical coaching intensifies; athletes start being rotated into scrimmage and match-play settings.</p>
+            </div>
+            <div class="method-step" data-reveal>
+              <span class="step-num">Stage 4</span>
+              <h3>Competition exposure</h3>
+              <p>Selected athletes are entered into district and state-level meets, with a coach attending every fixture.</p>
+            </div>
+          </div>
         </div>
-        <div class="method-steps">
-          <div class="method-step" data-reveal>
-            <span class="step-num">Stage 1</span>
-            <h3>Assessment week</h3>
-            <p>Every new athlete is benchmarked on speed, mobility and sport-specific skill before being placed in a batch — never by age alone.</p>
-          </div>
-          <div class="method-step" data-reveal>
-            <span class="step-num">Stage 2</span>
-            <h3>Foundation block</h3>
-            <p>Eight weeks on movement fundamentals and conditioning, run alongside light sport-specific drilling.</p>
-          </div>
-          <div class="method-step" data-reveal>
-            <span class="step-num">Stage 3</span>
-            <h3>Skill progression</h3>
-            <p>Technical coaching intensifies; athletes start being rotated into scrimmage and match-play settings.</p>
-          </div>
-          <div class="method-step" data-reveal>
-            <span class="step-num">Stage 4</span>
-            <h3>Competition exposure</h3>
-            <p>Selected athletes are entered into district and state-level meets, with a coach attending every fixture.</p>
-          </div>
-        </div>
+        <figure class="method-visual" data-reveal>
+          <img src="/pic/gym-ringan-modern-peralgym.webp" alt="A coach guiding athletes through a structured conditioning block" width="720" height="900" loading="lazy">
+          <figcaption>Every athlete moves through the same four stages, at their own pace.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -244,23 +288,23 @@
       </div>
       <div class="coach-rail" tabindex="0" aria-label="Coach previews, scroll horizontally" data-reveal>
         <article class="coach-tile">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=70&fm=webp&fit=crop&crop=face" alt="Portrait placeholder for Coach Arvind Rao" width="240" height="288" loading="lazy">
+          <img src="/pic/images .webp" alt="Portrait placeholder for Coach Arvind Rao" width="240" height="288" loading="lazy">
           <div class="coach-tile-body"><h4>Arvind Rao</h4><span>Athletics &amp; Sprints</span></div>
         </article>
         <article class="coach-tile">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=70&fm=webp&fit=crop&crop=face" alt="Portrait placeholder for Coach Meera Iyer" width="240" height="288" loading="lazy">
-          <div class="coach-tile-body"><h4>Meera Iyer</h4><span>Swimming</span></div>
+          <img src="/pic/swimmer.webp" alt="Portrait placeholder for Coach Meera Iyer" width="240" height="288" loading="lazy">
+          <div class="coach-tile-body"><h4>Prajwal Iyer</h4><span>Swimming</span></div>
         </article>
         <article class="coach-tile">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=70&fm=webp&fit=crop&crop=face" alt="Portrait placeholder for Coach Vikram Shetty" width="240" height="288" loading="lazy">
+          <img src="/pic/coach33.webp" alt="Portrait placeholder for Coach Vikram Shetty" width="240" height="288" loading="lazy">
           <div class="coach-tile-body"><h4>Vikram Shetty</h4><span>Football</span></div>
         </article>
         <article class="coach-tile">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=70&fm=webp&fit=crop&crop=face" alt="Portrait placeholder for Coach Divya Nair" width="240" height="288" loading="lazy">
-          <div class="coach-tile-body"><h4>Divya Nair</h4><span>Cricket — Batting</span></div>
+          <img src="/pic/cricket1.webp" alt="Portrait placeholder for Coach Divya Nair" width="240" height="288" loading="lazy">
+          <div class="coach-tile-body"><h4>Michael</h4><span>Cricket — Batting</span></div>
         </article>
         <article class="coach-tile">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=70&fm=webp&fit=crop&crop=face" alt="Portrait placeholder for Coach Sanjay Kulkarni" width="240" height="288" loading="lazy">
+          <img src="/pic/coach11.webp" alt="Portrait placeholder for Coach Sanjay Kulkarni" width="240" height="288" loading="lazy">
           <div class="coach-tile-body"><h4>Sanjay Kulkarni</h4><span>Basketball</span></div>
         </article>
       </div>
@@ -273,7 +317,7 @@
     <div class="wrap">
       <div class="facility-feature">
         <div class="facility-art" data-reveal>
-          <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=640&q=70&fm=webp&fit=crop" alt="Overhead diagram-style view of the academy's full-size turf field" width="640" height="480" loading="lazy">
+          <img src="/pic/stadium1.webp" alt="Overhead diagram-style view of the academy's full-size turf field" width="640" height="480" loading="lazy">
         </div>
         <div class="facility-copy">
           <span class="eyebrow">Where training happens</span>
@@ -343,13 +387,13 @@
         <h2>A look at a regular training week</h2>
       </div>
       <div class="mosaic" data-reveal>
-        <div class="mosaic-cell m1"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=70&fm=webp&fit=crop" alt="Athletics training session" loading="lazy"></div>
-        <div class="mosaic-cell"><img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=70&fm=webp&fit=crop" alt="Football drill" loading="lazy"></div>
-        <div class="mosaic-cell"><img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=600&q=70&fm=webp&fit=crop" alt="Cricket net practice" loading="lazy"></div>
-        <div class="mosaic-cell"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=70&fm=webp&fit=crop" alt="Swimming lane training" loading="lazy"></div>
-        <div class="mosaic-cell"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=70&fm=webp&fit=crop" alt="Strength training" loading="lazy"></div>
-        <div class="mosaic-cell m6"><img src="https://images.unsplash.com/photo-1546519638405-a2c5e1b2d634?w=800&q=70&fm=webp&fit=crop" alt="Basketball court drills" loading="lazy"></div>
-        <div class="mosaic-cell"><img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&q=70&fm=webp&fit=crop" alt="Relay handoff training" loading="lazy"></div>
+        <div class="mosaic-cell m1"><img src="/pic/stadium1.webp" alt="Athletics training session" loading="lazy"></div>
+        <div class="mosaic-cell"><img src="/pic/football (1).webp" alt="Football drill" loading="lazy"></div>
+        <div class="mosaic-cell"><img src="/pic/crickett.webp" alt="Cricket net practice" loading="lazy"></div>
+        <div class="mosaic-cell"><img src="/pic/swimmer.webp" alt="Swimming lane training" loading="lazy"></div>
+        <div class="mosaic-cell"><img src="/pic/gym-ringan-modern-peralgym.webp" alt="Strength training" loading="lazy"></div>
+        <div class="mosaic-cell m6"><img src="/pic/footwork-drills.webp" alt="Basketball court drills" loading="lazy"></div>
+        <div class="mosaic-cell"><img src="/pic/run.webp" alt="Relay handoff training" loading="lazy"></div>
       </div>
       <p style="margin-top:1.4rem;"><a href="gallery.html" class="procard-link" style="color: var(--field);">Open the full gallery <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
@@ -436,10 +480,11 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
+      <div class="footer-brand"><a href="index.html">
         <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="footer-logo" width="130" height="52" loading="lazy">
-        <p class="footer-tagline">Coaching athletes from first sprint to first selection trial, on three campuses across the city.</p>
+        </a><p class="footer-tagline">Coaching athletes from first sprint to first selection trial, on three campuses across the city.</p>
       </div>
+      
       <div class="footer-col">
         <h4>Explore</h4>
         <ul>
@@ -465,15 +510,27 @@
           <li>6:00am – 8:30pm, all week</li>
         </ul>
       </div>
+        <div class="footer-socials" aria-label="Social links">
+  <a href="404.html" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5.5"/>
+      <circle cx="12" cy="12" r="4.4"/>
+      <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
+    </svg>
+  </a>
+  <a href="404.html" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.39.53A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.89.53 9.39.53 9.39.53s7.5 0 9.39-.53a3 3 0 0 0 2.11-2.12A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/>
+    </svg>
+  </a>
+  <a href="404.html" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; <span data-year></span> Stackly Sports Academy. All rights reserved.</span>
-      <div class="footer-socials" aria-label="Social links">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="YouTube">YT</a>
-        <a href="#" aria-label="WhatsApp">WA</a>
-      </div>
-    </div>
+
   </div>
 </footer>
 

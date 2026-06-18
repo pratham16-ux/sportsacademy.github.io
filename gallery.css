@@ -153,27 +153,105 @@
 }
 
 /* ---------- 5. TIMELINE ---------- */
-.timeline{ position:relative; padding-left: 2.2rem; }
-.timeline::before{
-  content:""; position:absolute; left:8px; top:0; bottom:0;
-  width:2px; background: var(--line);
-}
-.timeline-item{
-  position:relative; padding-bottom: var(--gap-m);
-  opacity:0; transform: translateX(-12px);
-  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
-}
-.timeline-item.is-visible{ opacity:1; transform:none; }
-.timeline-dot{
-  position:absolute; left: -2.2rem; top:4px;
-  width:16px; height:16px; border-radius:50%;
-  background: var(--gold); border: 3px solid var(--white);
-  box-shadow: 0 0 0 2px var(--gold-deep);
-}
-.timeline-item h4{ font-family: var(--f-display); text-transform:uppercase; color: var(--field-deep); font-size:1rem; }
-.timeline-item time{ font-family: var(--f-mono); font-size:0.72rem; color: var(--gold-deep); display:block; margin-bottom:0.3em; }
-.timeline-item p{ color: var(--ink-soft); font-size:0.92rem; }
+/* ---------- 5. BEFORE / AFTER DRAG COMPARE ---------- */
 
+/* registering --pos lets us animate it (the intro sweep below) */
+@property --pos{
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+.compare-wrap{
+  --pos: 50%;
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  margin: var(--gap-l) auto 0;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 24px 60px -28px rgba(15,46,31,0.5);
+}
+.compare-wrap img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+/* the "after" image is revealed only to the right of the handle */
+.compare-after{ clip-path: inset(0 0 0 var(--pos)); }
+
+/* divider line + round grab knob */
+.compare-handle{
+  position: absolute; top: 0; bottom: 0;
+  left: var(--pos);
+  width: 3px;
+  background: var(--gold-soft);
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+}
+.compare-handle::before{
+  content: "";
+  position: absolute; top: 50%; left: 50%;
+  width: 44px; height: 44px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--gold-soft);
+  border: 3px solid var(--field-deep);
+  box-shadow: 0 4px 14px rgba(15,46,31,0.45), 0 0 0 0 rgba(232,199,102,0.5);
+  animation: knobPulse 2.4s ease-out infinite;
+}
+.compare-handle::after{
+  content: "\21D4";              /* ⇔ double arrow */
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--field-deep);
+  font-size: 1.05rem; font-weight: 700;
+  z-index: 4;
+}
+
+/* corner labels */
+.compare-label{
+  position: absolute; bottom: 1rem;
+  font-family: var(--f-mono); font-size: 0.72rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(15,46,31,0.7);
+  padding: 0.35em 0.8em; border-radius: 999px;
+  z-index: 2;
+}
+.cl-before{ left: 1rem; }
+.cl-after{ right: 1rem; }
+
+/* ── unique animation #1: handle sweeps in to "preview" the compare ── */
+.compare-wrap.is-visible{ animation: comparePeek 2.2s var(--ease-out) 0.25s 1; }
+@keyframes comparePeek{
+  0%   { --pos: 50%; }
+  28%  { --pos: 86%; }
+  62%  { --pos: 16%; }
+  100% { --pos: 50%; }
+}
+
+/* ── unique animation #2: pulsing ring on the knob, stops on interaction ── */
+@keyframes knobPulse{
+  0%   { box-shadow: 0 4px 14px rgba(15,46,31,0.45), 0 0 0 0   rgba(232,199,102,0.5); }
+  70%  { box-shadow: 0 4px 14px rgba(15,46,31,0.45), 0 0 0 16px rgba(232,199,102,0); }
+  100% { box-shadow: 0 4px 14px rgba(15,46,31,0.45), 0 0 0 0   rgba(232,199,102,0); }
+}
+.compare-wrap:hover .compare-handle::before,
+.compare-wrap.is-dragging .compare-handle::before{ animation: none; }
+.compare-wrap.is-dragging{ cursor: grabbing; }
+
+@media (max-width: 640px){
+  .compare-wrap{ aspect-ratio: 4 / 5; }
+  .compare-handle::before{ width: 38px; height: 38px; }
+}
 /* ---------- 6. STATS STRIP ---------- */
 .gallery-stat-strip{
   background: var(--field-deep); color: var(--cream);
@@ -188,26 +266,71 @@
 .gallery-stat span{ font-family: var(--f-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color: var(--cream-dim); }
 
 /* ---------- 7. CAMPUSES TABS (photo tour) ---------- */
-.campus-tabs{ display:flex; gap: var(--gap-s); margin-bottom: var(--gap-m); flex-wrap:wrap; }
-.campus-tab{
-  font-family: var(--f-display); text-transform:uppercase; font-size:0.82rem;
-  letter-spacing:0.04em; padding: 0.55em 1.2em; border-radius:999px;
-  border: 1.5px solid var(--line); white-space:nowrap;
-  background: var(--white); color: var(--ink-soft);
-  transition: all .3s var(--ease-soft);
+/* ---------- 7. STAT CALLOUTS ---------- */
+.stat-strip{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--field-deep);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -30px rgba(15,46,31,0.55);
 }
-.campus-tab.is-active{ background: var(--field); border-color: var(--field); color: var(--cream); }
-.campus-panel{ display:none; }
-.campus-panel.is-active{ display:block; }
-.campus-gallery{ display:grid; grid-template-columns: 2fr 1fr; gap: 8px; }
-.campus-gallery img{ width:100%; height:200px; object-fit:cover; display:block; }
-.campus-gallery img:first-child{ height:100%; }
-.campus-meta{ margin-top: var(--gap-m); }
-.campus-meta h3{ font-family: var(--f-display); text-transform:uppercase; font-size:1.1rem; color: var(--field-deep); }
-.campus-meta p{ color: var(--ink-soft); margin-top:0.4em; font-size:0.92rem; }
-.campus-meta ul{ display:flex; flex-direction:column; gap:0.4em; margin-top: var(--gap-s); }
-.campus-meta ul li{ font-family: var(--f-mono); font-size:0.8rem; color: var(--ink-soft); display:flex; gap:0.5em; }
-.campus-meta ul li::before{ content:"→"; color: var(--gold-deep); }
+.stat-strip-item{
+  position: relative;
+  text-align: center;
+  padding: var(--gap-l) var(--gap-m);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+}
+.stat-strip.is-visible .stat-strip-item{ opacity: 1; transform: none; }
+.stat-strip.is-visible .stat-strip-item:nth-child(2){ transition-delay: .12s; }
+.stat-strip.is-visible .stat-strip-item:nth-child(3){ transition-delay: .24s; }
+
+/* thin divider between items */
+.stat-strip-item + .stat-strip-item::before{
+  content: ""; position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 1px; height: 56%;
+  background: rgba(247,243,232,0.14);
+}
+
+.stat-strip-item strong{
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--step4);
+  line-height: 1;
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+}
+.stat-strip-item span{
+  display: block;
+  margin-top: 0.6em;
+  font-family: var(--f-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* gold accent that grows under each number on reveal */
+.stat-strip-item strong::after{
+  content: ""; display: block;
+  width: 0; height: 3px; margin: 0.45em auto 0;
+  background: var(--gold-deep);
+  transition: width .6s var(--ease-out) .35s;
+}
+.stat-strip.is-visible .stat-strip-item strong::after{ width: 34px; }
+
+@media (max-width: 640px){
+  .stat-strip{ grid-template-columns: 1fr; }
+  .stat-strip-item{ padding: var(--gap-m); }
+  .stat-strip-item + .stat-strip-item::before{
+    left: 50%; top: 0; transform: translateX(-50%);
+    width: 56%; height: 1px;
+  }
+}
 
 /* ---------- 8. VIDEO GRID ---------- */
 .video-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--gap-m); }

@@ -151,5 +151,77 @@
   } else {
     timelineItems.forEach(function (el) { el.classList.add("is-visible"); });
   }
+/* ---------- before/after drag compare ---------- */
+  var compareWrap = document.getElementById("compareWrap");
+  if (compareWrap) {
+    var dragging = false;
+
+    function setPos(clientX) {
+      var rect = compareWrap.getBoundingClientRect();
+      var pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      compareWrap.style.setProperty("--pos", pct + "%");
+    }
+    function pointX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+
+    function startDrag(e) {
+      dragging = true;
+      compareWrap.classList.add("is-dragging");
+      setPos(pointX(e));
+    }
+    function moveDrag(e) { if (dragging) setPos(pointX(e)); }
+    function endDrag() {
+      dragging = false;
+      compareWrap.classList.remove("is-dragging");
+    }
+
+    compareWrap.addEventListener("mousedown", startDrag);
+    window.addEventListener("mousemove", moveDrag);
+    window.addEventListener("mouseup", endDrag);
+
+    compareWrap.addEventListener("touchstart", startDrag, { passive: true });
+    window.addEventListener("touchmove", moveDrag, { passive: true });
+    window.addEventListener("touchend", endDrag);
+
+    // tap/click anywhere on the strip jumps the handle there
+    compareWrap.addEventListener("click", function (e) {
+      if (!dragging) setPos(e.clientX);
+    });
+  }
+/* ---------- stat callouts count-up ---------- */
+  var statStrip = document.querySelector(".stat-strip");
+  if (statStrip) {
+    var counted = false;
+    function runCount() {
+      if (counted) return;
+      counted = true;
+      statStrip.querySelectorAll(".stat-strip-item strong").forEach(function (el) {
+        var raw = el.textContent.trim();
+        var target = parseInt(raw, 10);
+        if (isNaN(target)) return;
+        var suffix = raw.replace(/[0-9]/g, "");   // keeps the "+" on 40+
+        var dur = 1400, start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);      // ease-out
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+      });
+    }
+    if ("IntersectionObserver" in window) {
+      var statIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { runCount(); statIO.disconnect(); }
+        });
+      }, { threshold: 0.4 });
+      statIO.observe(statStrip);
+    } else {
+      runCount();
+    }
+  }
 
 })();

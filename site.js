@@ -23,19 +23,25 @@
   /* ---------- hamburger / mobile drawer ---------- */
   var burger = document.querySelector(".hamburger");
   var drawer = document.querySelector(".mobile-drawer");
+  var drawerClose = drawer ? drawer.querySelector(".drawer-close") : null;
   var drawerLinks = drawer ? drawer.querySelectorAll("a") : [];
 
   function openDrawer() {
     if (!drawer) return;
     drawer.setAttribute("data-open", "true");
     burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-label", "Close menu");
     document.body.classList.add("drawer-locked");
+    if (drawerClose) drawerClose.focus();
   }
   function closeDrawer() {
     if (!drawer) return;
+    var wasOpen = drawer.getAttribute("data-open") === "true";
     drawer.setAttribute("data-open", "false");
     burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Open menu");
     document.body.classList.remove("drawer-locked");
+    if (wasOpen) burger.focus();
   }
   if (burger && drawer) {
     burger.addEventListener("click", function () {
@@ -44,11 +50,20 @@
       else openDrawer();
     });
     drawer.querySelector(".drawer-backdrop").addEventListener("click", closeDrawer);
+    if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
     drawerLinks.forEach(function (a) {
       a.addEventListener("click", closeDrawer);
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeDrawer();
+    });
+    // if the drawer is open and the viewport grows past the mobile
+    // breakpoint, the hamburger disappears — close it so it can't get
+    // stuck open over the desktop layout with the page scroll locked.
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 880 && drawer.getAttribute("data-open") === "true") {
+        closeDrawer();
+      }
     });
   }
 

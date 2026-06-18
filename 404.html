@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Stackly Sports Academy</title>
+<meta name="description" content="This page has gone off the track. Head back to the Stackly Sports Academy home page, browse our programs, or book a free trial session.">
+<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="nav.css">
+<style>
+  /* ---------- 404 — "off the track" lane treatment ---------- */
+  .error-hero{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--field-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    padding-top: 78px;
+  }
+  /* faint running-track lanes drifting across the background */
+  .error-lanes{
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      115deg,
+      transparent 0,
+      transparent 84px,
+      rgba(232,199,102,0.06) 84px,
+      rgba(232,199,102,0.06) 86px
+    );
+    animation: laneDrift 24s linear infinite;
+  }
+  @keyframes laneDrift{ to{ background-position: 600px 0; } }
+
+  .error-inner{
+    position: relative; z-index: 2;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--edge);
+    width: 100%;
+    padding-block: var(--gap-xl);
+  }
+  .error-eyebrow{ color: var(--gold-soft); }
+  .error-eyebrow::before{ background: var(--gold-soft); }
+
+  /* the lane / bib number — the signature element */
+  .error-code{
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(6rem, 4rem + 18vw, 16rem);
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--gold-soft);
+    text-stroke: 2px var(--gold-soft);
+    margin-block: var(--gap-s) var(--gap-m);
+    position: relative;
+    display: inline-block;
+  }
+  /* the middle 0 filled solid, like a lane marker */
+  .error-code .fill{ color: var(--gold-soft); -webkit-text-stroke: 0; }
+
+  .error-hero h1{
+    color: var(--cream);
+    font-size: var(--step3);
+    max-width: 18ch;
+  }
+  .error-hero p{
+    color: var(--cream-dim);
+    font-size: var(--step1);
+    max-width: 46ch;
+    margin-top: var(--gap-s);
+  }
+  .error-actions{
+    display: flex; gap: var(--gap-s); flex-wrap: wrap;
+    margin-top: var(--gap-l);
+  }
+
+  /* quick links back into the site */
+  .error-links{
+    display: flex; gap: var(--gap-m); flex-wrap: wrap;
+    margin-top: var(--gap-xl);
+    padding-top: var(--gap-m);
+    border-top: 1px solid rgba(247,243,232,0.14);
+  }
+  .error-links a{
+    font-family: var(--f-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    display: inline-flex; align-items: center; gap: 0.5em;
+    transition: color .25s var(--ease-out);
+  }
+  .error-links a::before{ content: "↳"; color: var(--gold-soft); }
+  .error-links a:hover{ color: var(--gold-soft); }
+
+  @media (max-width: 640px){
+    .error-hero p{ font-size: var(--step0); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<main id="main">
+
+  <section class="error-hero">
+    <div class="error-lanes" aria-hidden="true"></div>
+    <div class="error-inner">
+      <span class="eyebrow error-eyebrow">Error 404 · Off the track</span>
+      <div class="error-code" aria-hidden="true">4<span class="fill">0</span>4</div>
+      <h1>This lane leads off the track</h1>
+      <p>The page you were after has been moved, renamed, or never existed. Let's get you back to a marked lane.</p>
+      <div class="error-actions">
+        <a href="index.html" class="btn btn-gold">Back to home</a>
+        <a href="contact.html" class="btn btn-ghost" style="border-color: var(--cream-dim); color: var(--cream);">Book a free trial</a>
+      </div>
+      
+    </div>
+  </section>
+
+</main>
+
+
+<script src="site.js"></script>
+</body>
+</html>

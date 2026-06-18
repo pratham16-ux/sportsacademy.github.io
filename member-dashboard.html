@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member dashboard — Stackly Sports Academy</title>
+<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body data-role="member">
+<a class="skip-link" href="#dashBody">Skip to content</a>
+
+<div class="dash">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-side" id="dashSide">
+    <div class="dash-side-top">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="dash-logo brand-mark" width="100" height="40">
+      <span class="dash-side-role">Member portal</span>
+    </div>
+
+    <nav class="dash-nav" aria-label="Member sections">
+      <span class="dash-nav-label">Main</span>
+      <button class="dash-nav-btn is-active" data-panel="overview">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="dash-nav-btn" data-panel="schedule">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        My schedule
+        <span class="dash-nav-badge" id="navUpcoming">0</span>
+      </button>
+      <button class="dash-nav-btn" data-panel="attendance">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Attendance
+      </button>
+      <button class="dash-nav-btn" data-panel="progress">
+        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+        Progress
+      </button>
+
+      <span class="dash-nav-label">Account</span>
+      <button class="dash-nav-btn" data-panel="payments">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Fees &amp; payments
+        <span class="dash-nav-badge" id="navDue" style="background:#c0392b;color:#fff;">!</span>
+      </button>
+      <button class="dash-nav-btn" data-panel="profile">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Profile
+      </button>
+    </nav>
+
+    <div class="dash-side-foot">
+      <button class="btn btn-sm dash-logout" id="logoutBtn">Sign out</button>
+    </div>
+  </aside>
+
+  <div class="dash-scrim" id="dashScrim"></div>
+
+  <!-- MAIN -->
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <div class="dash-topbar-left">
+        <button class="dash-burger" id="dashBurger" aria-label="Open menu">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <span class="dash-page-title" id="pageTitle">Overview</span>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-account">
+          <div class="dash-account-meta">
+            <span class="dash-account-name" id="acctName">Member</span>
+            <span class="dash-account-email" id="acctEmail">—</span>
+          </div>
+          <div class="dash-avatar" id="acctAvatar">M</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-body" id="dashBody">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="panel is-active" data-panel="overview">
+        <div class="dash-welcome">
+          <div>
+            <h2 id="welcomeName">Welcome back</h2>
+            <p>Here's your training week at a glance.</p>
+            <span class="logged-as">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+              Signed in as <strong id="welcomeEmail" style="color:var(--cream);margin-left:0.3em;">—</strong>
+            </span>
+          </div>
+          <div class="dash-welcome-stat">
+            <strong id="ovAttendance">—</strong>
+            <span>Attendance this month</span>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="statcard"><div class="s-label">Primary sport</div><div class="s-val" style="font-size:1.5rem;">Athletics</div><div class="s-foot">U-16 batch · Lane 4</div></div>
+          <div class="statcard"><div class="s-label">Sessions this week</div><div class="s-val" id="ovSessions">—</div><div class="s-foot">Across the week</div></div>
+          <div class="statcard"><div class="s-label">Skill rating</div><div class="s-val">7.8</div><div class="s-foot">+0.4 since last month</div></div>
+          <div class="statcard"><div class="s-label">Next fee due</div><div class="s-val" style="font-size:1.5rem;">₹4,500</div><div class="s-foot" style="color:#c0392b;">Due 30 Jun</div></div>
+        </div>
+
+        <div class="card-2col">
+          <div class="card">
+            <h4>Next up</h4>
+            <div class="row-list" id="ovNextList"></div>
+          </div>
+          <div class="card">
+            <h4>Coach note</h4>
+            <p style="color:var(--ink-soft);font-size:0.92rem;">Good drive off the blocks this week — keep the arm carriage relaxed through the first 20m. We'll film the start again Saturday.</p>
+            <p style="font-family:var(--f-mono);font-size:0.72rem;color:var(--gold-deep);margin-top:var(--gap-s);">— Coach Meera, Athletics</p>
+          </div>
+        </div>
+      </section>
+
+       <!-- ===== SCHEDULE ===== -->
+      <section class="panel" data-panel="schedule">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">This week</span>
+            <h3>My schedule</h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row-list" id="scheduleList">
+            <div class="list-row">
+              <span class="list-when">Mon · 6:00am</span>
+              <div class="list-main"><strong>Track — sprints block</strong><span>Hebbal Grounds · Lane 4 · Coach Meera</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">Going ✓</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Tue · 5:30pm</span>
+              <div class="list-main"><strong>Recovery &amp; mobility</strong><span>S&amp;C Lab · Coach Arjun</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">Going ✓</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Wed · 6:00am</span>
+              <div class="list-main"><strong>Track — speed endurance</strong><span>Hebbal Grounds · Lane 4 · Coach Meera</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">Going ✓</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Fri · 6:00am</span>
+              <div class="list-main"><strong>Strength &amp; conditioning</strong><span>S&amp;C Lab · Coach Arjun</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">I'll be there</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Sat · 7:00am</span>
+              <div class="list-main"><strong>Technique review (filmed)</strong><span>Hebbal Grounds · Coach Meera</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">I'll be there</button></div>
+            </div>
+            <div class="list-row">
+              <span class="list-when">Sun · 7:30am</span>
+              <div class="list-main"><strong>Time trial — 150m × 4</strong><span>Yelahanka Track · Coach Meera</span></div>
+              <div class="list-action"><button class="btn btn-sm btn-ghost">I'll be there</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ATTENDANCE ===== -->
+      <section class="panel" data-panel="attendance">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Recent sessions</span>
+            <h3>Attendance record</h3>
+          </div>
+        </div>
+        <div class="card">
+          <table class="dtable">
+            <thead><tr><th>Date</th><th>Session</th><th>Coach</th><th>Status</th></tr></thead>
+            <tbody id="attTable">
+              <tr><td>15 Jun</td><td class="name-cell">Recovery &amp; mobility</td><td>Coach Arjun</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>14 Jun</td><td class="name-cell">Track — sprints</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>12 Jun</td><td class="name-cell">Speed endurance</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>10 Jun</td><td class="name-cell">S&amp;C</td><td>Coach Arjun</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>08 Jun</td><td class="name-cell">Technique review</td><td>Coach Meera</td><td><span class="pill pill-red">Absent</span></td></tr>
+              <tr><td>07 Jun</td><td class="name-cell">Track — sprints</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>05 Jun</td><td class="name-cell">Speed endurance</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>03 Jun</td><td class="name-cell">S&amp;C</td><td>Coach Arjun</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>01 Jun</td><td class="name-cell">Track — sprints</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>29 May</td><td class="name-cell">Time trial</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>27 May</td><td class="name-cell">Speed endurance</td><td>Coach Meera</td><td><span class="pill pill-red">Absent</span></td></tr>
+              <tr><td>25 May</td><td class="name-cell">S&amp;C</td><td>Coach Arjun</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>24 May</td><td class="name-cell">Track — sprints</td><td>Coach Meera</td><td><span class="pill pill-green">Present</span></td></tr>
+              <tr><td>22 May</td><td class="name-cell">Recovery &amp; mobility</td><td>Coach Arjun</td><td><span class="pill pill-green">Present</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PROGRESS ===== -->
+      <section class="panel" data-panel="progress">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Skill ladder</span>
+            <h3>Your progress</h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="prog" id="progList">
+            <div class="prog-item"><div class="prog-top"><strong>Block start reaction</strong><span>82%</span></div><div class="prog-track"><div class="prog-fill" style="width:82%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Acceleration (0–30m)</strong><span>74%</span></div><div class="prog-track"><div class="prog-fill" style="width:74%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Top speed mechanics</strong><span>68%</span></div><div class="prog-track"><div class="prog-fill" style="width:68%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Speed endurance</strong><span>71%</span></div><div class="prog-track"><div class="prog-fill" style="width:71%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Endurance base</strong><span>60%</span></div><div class="prog-track"><div class="prog-fill" style="width:60%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Power output</strong><span>66%</span></div><div class="prog-track"><div class="prog-fill" style="width:66%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Flexibility &amp; mobility</strong><span>88%</span></div><div class="prog-track"><div class="prog-fill" style="width:88%"></div></div></div>
+            <div class="prog-item"><div class="prog-top"><strong>Core stability</strong><span>79%</span></div><div class="prog-track"><div class="prog-fill" style="width:79%"></div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Season bests</h4>
+          <table class="dtable">
+            <thead><tr><th>Event</th><th>Mark</th><th>Note</th></tr></thead>
+            <tbody id="bestsTable">
+              <tr><td class="name-cell">100m</td><td>12.18s</td><td>PB · 29 May</td></tr>
+              <tr><td class="name-cell">200m</td><td>25.04s</td><td>PB · 11 May</td></tr>
+              <tr><td class="name-cell">Standing long jump</td><td>2.31m</td><td>season best</td></tr>
+              <tr><td class="name-cell">30m fly</td><td>3.62s</td><td>PB · 14 Jun</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PAYMENTS ===== -->
+      <section class="panel" data-panel="payments">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Fees &amp; invoices</span>
+            <h3>Payments</h3>
+          </div>
+        </div>
+        <div class="card">
+          <table class="dtable">
+            <thead><tr><th>Invoice</th><th>Period</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+            <tbody id="payTable">
+              <tr><td class="name-cell">INV-2406</td><td>Jun 2026</td><td>₹4,500</td><td><span class="pill pill-red">Due</span></td><td><button class="btn btn-gold btn-sm">Pay now</button></td></tr>
+              <tr><td class="name-cell">INV-2405</td><td>May 2026</td><td>₹4,500</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+              <tr><td class="name-cell">INV-K12</td><td>Season kit 25–26</td><td>₹2,200</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+              <tr><td class="name-cell">INV-2404</td><td>Apr 2026</td><td>₹4,500</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+              <tr><td class="name-cell">INV-2403</td><td>Mar 2026</td><td>₹4,500</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+              <tr><td class="name-cell">INV-2402</td><td>Feb 2026</td><td>₹4,500</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+              <tr><td class="name-cell">INV-2401</td><td>Jan 2026</td><td>₹4,500</td><td><span class="pill pill-green">Paid</span></td><td><button class="btn btn-ghost btn-sm">Receipt</button></td></tr>
+            </tbody>
+          </table>
+          <p id="paySummary" style="font-family:var(--f-mono);font-size:0.75rem;color:var(--ink-soft);margin-top:var(--gap-s);border-top:1px solid var(--line);padding-top:var(--gap-s);">Paid to date: ₹24,700  ·  Outstanding: ₹4,500</p>
+        </div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section class="panel" data-panel="profile">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Your details</span>
+            <h3>Profile</h3>
+          </div>
+        </div>
+        <div class="card" style="max-width:620px;">
+          <form id="profileForm" novalidate>
+            <div class="d-row">
+              <div class="d-field"><label for="pf-name">Full name</label><input type="text" id="pf-name" maxlength="16" pattern="[A-Za-z]{1,16}" title="Letters only, up to 16 characters"></div>
+              <div class="d-field"><label for="pf-email">Email</label><input type="email" id="pf-email" readonly></div>
+            </div>
+            <div class="d-row">
+              <div class="d-field"><label for="pf-phone">Phone</label><input type="tel" id="pf-phone" inputmode="numeric" maxlength="10" pattern="\d{10}" title="Exactly 10 digits" value="9876543210"></div>
+              <div class="d-field">
+                <label for="pf-sport">Primary sport</label>
+                <select id="pf-sport">
+                  <option>Athletics</option><option>Football</option><option>Cricket</option><option>Swimming</option><option>Basketball</option>
+                </select>
+              </div>
+            </div>
+            <div class="d-row">
+              <div class="d-field">
+                <label for="pf-campus">Campus</label>
+                <select id="pf-campus">
+                  <option>Hebbal Grounds</option><option>Vidyaranyapura Turf</option><option>Yelahanka Track</option>
+                </select>
+              </div>
+              <div class="d-field">
+                <label for="pf-batch">Batch</label>
+                <select id="pf-batch"><option>U-16</option><option>U-14</option><option>U-12</option><option>Senior</option></select>
+              </div>
+            </div>
+            <div class="d-field"><label for="pf-emergency">Emergency contact</label><input type="tel" id="pf-emergency" inputmode="numeric" maxlength="10" pattern="\d{10}" title="Exactly 10 digits" value="9000000000"></div>
+            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="dashboard-common.js"></script>
+<script src="member-dashboard.js"></script>
+</body>
+</html>

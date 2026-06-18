@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Stackly Sports Academy</title>
+<meta name="description" content="Sign in to your Stackly Sports Academy account as a member or coach.">
+<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="base.css">
+<style>
+  /* ============================================================
+     SIGN-IN — editorial lane panel + auth card
+     ============================================================ */
+  .auth-shell{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  /* ---------- LEFT: brand / lane panel ---------- */
+  .auth-brand{
+    background: var(--field-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    padding: var(--gap-l) var(--gap-l) var(--gap-xl);
+    display: flex;
+    flex-direction: column;
+  }
+  /* faint drifting track lanes */
+  .auth-brand-bg{
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      115deg, transparent 0, transparent 84px,
+      rgba(232,199,102,0.06) 84px, rgba(232,199,102,0.06) 86px);
+    animation: laneDrift 26s linear infinite;
+  }
+  @keyframes laneDrift{ to{ background-position: 600px 0; } }
+
+  .auth-brand-top{
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--gap-m); flex-wrap: wrap;
+  }
+  .auth-brand-logo{
+    height: 66px;           /* a touch larger */
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    /* tint to the theme (cream/gold) so it reads on the dark panel */
+    filter: brightness(0) saturate(100%)
+            invert(96%) sepia(18%) saturate(500%) hue-rotate(5deg) brightness(1.1);
+  }
+  .auth-back{
+    font-family: var(--f-mono); font-size: 0.78rem;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--cream-dim);
+    display: inline-flex; align-items: center; gap: 0.5em;
+    transition: color .25s var(--ease-out);
+  }
+  .auth-back svg{ width: 16px; height: 16px; stroke: var(--gold-soft); fill: none; stroke-width: 2; }
+  .auth-back:hover{ color: var(--gold-soft); }
+
+  .auth-brand-mid{
+    position: relative; z-index: 2;
+    margin-top: auto; padding-top: var(--gap-xl);
+    max-width: 30ch;
+  }
+  .auth-brand-mid .eyebrow{ color: var(--gold-soft); }
+  .auth-brand-mid .eyebrow::before{ background: var(--gold-soft); }
+  .auth-brand-mid h2{
+    color: var(--cream);
+    margin-top: var(--gap-s);
+    font-size: var(--step3);
+  }
+
+  /* lane list */
+  .lane-list{ margin-top: var(--gap-l); display: flex; flex-direction: column; gap: 0.7em; }
+  .lane{ display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 0.8em; }
+  .lane-num{ font-family: var(--f-mono); font-size: 0.72rem; color: var(--gold-soft); }
+  .lane-track{ height: 2px; background: rgba(247,243,232,0.18); position: relative; overflow: hidden; }
+  .lane-track::after{
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+    background: var(--gold-soft);
+    animation: laneFill 2.4s var(--ease-out) infinite alternate;
+  }
+  .lane:nth-child(2) .lane-track::after{ animation-delay: .3s; }
+  .lane:nth-child(3) .lane-track::after{ animation-delay: .6s; }
+  .lane:nth-child(4) .lane-track::after{ animation-delay: .9s; }
+  .lane:nth-child(5) .lane-track::after{ animation-delay: 1.2s; }
+  @keyframes laneFill{ 0%{ width: 12%; } 100%{ width: 86%; } }
+  .lane-name{
+    font-family: var(--f-display); text-transform: uppercase;
+    font-size: 0.82rem; color: var(--cream-dim); letter-spacing: 0.03em;
+  }
+
+  /* ---------- RIGHT: auth card ---------- */
+  .auth-main{
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cream);
+    padding: var(--gap-xl) var(--gap-l);
+  }
+  .auth-card{ width: 100%; max-width: 420px; }
+  .auth-card h1{ font-size: var(--step3); margin-top: 0.1em; }
+  .auth-intro{ color: var(--ink-soft); margin-top: 0.4em; font-size: 0.95rem; }
+
+  /* role segmented control */
+  .role-switch{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    background: var(--cream-dim);
+    border: 1px solid var(--line);
+    border-radius: 4px; padding: 5px;
+    margin-block: var(--gap-l) var(--gap-m);
+  }
+  .role-opt{
+    background: transparent; border: none; border-radius: 3px;
+    padding: 0.7em 0.6em; text-align: center; cursor: pointer;
+    display: flex; flex-direction: column; gap: 0.15em;
+    transition: background .25s var(--ease-out);
+  }
+  .role-opt .role-label{
+    font-family: var(--f-display); text-transform: uppercase;
+    font-size: 0.95rem; color: var(--ink-soft); letter-spacing: 0.02em;
+    transition: color .25s;
+  }
+  .role-opt .role-hint{ font-family: var(--f-mono); font-size: 0.64rem; color: var(--ink-soft); }
+  .role-opt.is-active{ background: var(--field); box-shadow: 0 6px 16px -8px rgba(15,46,31,0.5); }
+  .role-opt.is-active .role-label{ color: var(--cream); }
+  .role-opt.is-active .role-hint{ color: var(--gold-soft); }
+
+  /* fields */
+  .auth-field{ display: flex; flex-direction: column; gap: 0.35em; margin-bottom: var(--gap-s); }
+  .auth-field label{
+    font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .auth-field input{
+    font-family: var(--f-body); font-size: var(--step0);
+    color: var(--ink); background: var(--white);
+    border: 1.5px solid var(--line);
+    padding: 0.75em 0.9em; border-radius: 2px;
+    transition: border-color .25s var(--ease-soft);
+    width: 100%;
+  }
+  .auth-field input:focus{ border-color: var(--field); outline: none; }
+  .auth-field input.is-invalid{ border-color: #C0392B; background: #FFF; }
+
+  .auth-error{
+    font-family: var(--f-mono); font-size: 0.72rem; color: #C0392B;
+    min-height: 1em;
+  }
+
+  /* password show/hide */
+  .pwd-wrap{ position: relative; }
+  .pwd-wrap input{ padding-right: 4.2em; }
+  .pwd-toggle{
+    position: absolute; top: 50%; right: 0.6em; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--field); padding: 0.4em;
+  }
+  .pwd-toggle:hover{ color: var(--gold-deep); }
+
+  /* row: remember + forgot */
+  .auth-row{
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.6em; margin-block: var(--gap-s) var(--gap-m);
+  }
+  .auth-check{
+    display: flex; align-items: center; gap: 0.5em;
+    font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink-soft); cursor: pointer;
+  }
+  .auth-check input{ accent-color: var(--field); width: 15px; height: 15px; }
+  .auth-link{ font-family: var(--f-mono); font-size: 0.78rem; color: var(--field); }
+  .auth-link:hover{ color: var(--gold-deep); }
+
+  .auth-submit{ width: 100%; justify-content: center; }
+
+  /* divider + footer */
+  .auth-divider{
+    display: flex; align-items: center; gap: 0.8em;
+    font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft);
+    margin-block: var(--gap-m) var(--gap-s);
+  }
+  .auth-divider::before, .auth-divider::after{
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+  .auth-foot{ text-align: center; font-family: var(--f-mono); font-size: 0.82rem; color: var(--ink-soft); }
+  .auth-foot a{ color: var(--field); font-weight: 600; }
+  .auth-foot a:hover{ color: var(--gold-deep); }
+
+  /* responsive */
+  @media (max-width: 880px){
+    .auth-shell{ grid-template-columns: 1fr; }
+    .auth-brand{ display: none; }
+    .auth-main{ padding-block: var(--gap-l); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#authMain">Skip to content</a>
+
+<div class="auth-shell">
+
+  <!-- LEFT: brand / lane panel -->
+  <aside class="auth-brand">
+    <div class="auth-brand-bg" aria-hidden="true"></div>
+
+    <div class="auth-brand-top">
+      <img src="https://wsrv.nl/?url=https://snabsolutions.in/wp-content/uploads/2026/02/stackly-snab-solutions.png&w=260&h=104&output=webp&q=80&fit=inside" alt="Stackly Sports Academy" class="auth-brand-logo" width="115" height="46">
+      <a href="index.html" class="auth-back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Back to site
+      </a>
+    </div>
+
+    <div class="auth-brand-mid">
+      <span class="eyebrow">Member &amp; coach access</span>
+      <h2>Coaching built like a track, lane by lane.</h2>
+
+      <div class="lane-list" aria-hidden="true">
+        <div class="lane"><span class="lane-num">01</span><span class="lane-track"></span><span class="lane-name">Athletics</span></div>
+        <div class="lane"><span class="lane-num">02</span><span class="lane-track"></span><span class="lane-name">Football</span></div>
+        <div class="lane"><span class="lane-num">03</span><span class="lane-track"></span><span class="lane-name">Cricket</span></div>
+        <div class="lane"><span class="lane-num">04</span><span class="lane-track"></span><span class="lane-name">Swimming</span></div>
+        <div class="lane"><span class="lane-num">05</span><span class="lane-track"></span><span class="lane-name">Basketball</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT: auth card -->
+  <main class="auth-main" id="authMain">
+    <div class="auth-card">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Sign in</h1>
+      <p class="auth-intro">Choose how you're signing in, then enter your academy credentials.</p>
+
+      <!-- role segmented control -->
+      <div class="role-switch" role="tablist" aria-label="Sign in as">
+        <button type="button" class="role-opt is-active" data-role="member" role="tab" aria-selected="true">
+          <span class="role-label">Member</span>
+          <span class="role-hint">Athlete &amp; parent portal</span>
+        </button>
+        <button type="button" class="role-opt" data-role="coach" role="tab" aria-selected="false">
+          <span class="role-label">Coach</span>
+          <span class="role-hint">Staff &amp; squad management</span>
+        </button>
+      </div>
+
+      <form id="signinForm" novalidate>
+        <div class="auth-field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@stacklysports.in" inputmode="email"
+                 pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+          <span class="auth-error" id="emailError"></span>
+        </div>
+
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <div class="pwd-wrap">
+            <input type="password" id="password" name="password" autocomplete="current-password" placeholder="••••••••"
+                   pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}" required>
+            <button type="button" class="pwd-toggle" id="pwdToggle" aria-label="Show password">Show</button>
+          </div>
+          <span class="auth-error" id="passwordError"></span>
+        </div>
+
+        <div class="auth-row">
+          <label class="auth-check">
+            <input type="checkbox" id="remember" checked> Keep me signed in
+          </label>
+          <a href="404.html" class="auth-link" id="forgotLink">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary auth-submit" id="signinBtn">Sign in as Member</button>
+      </form>
+
+      <div class="auth-divider">New to Stackly</div>
+      <p class="auth-foot">Don't have an account yet? <a href="signup.html">Create new account</a></p>
+    </div>
+  </main>
+
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    var EMAIL_RE  = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    var STRONG_PW = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    var form     = document.getElementById("signinForm");
+    var email    = document.getElementById("email");
+    var pwd      = document.getElementById("password");
+    var emailErr = document.getElementById("emailError");
+    var pwdErr   = document.getElementById("passwordError");
+    var signinBtn = document.getElementById("signinBtn");
+    var roleOpts = document.querySelectorAll(".role-opt");
+
+    var currentRole = "member";
+
+    /* ---------- role segmented control ---------- */
+    function setRole(role) {
+      currentRole = role;
+      roleOpts.forEach(function (btn) {
+        var on = btn.getAttribute("data-role") === role;
+        btn.classList.toggle("is-active", on);
+        btn.setAttribute("aria-selected", String(on));
+      });
+      signinBtn.textContent = "Sign in as " + (role === "coach" ? "Coach" : "Member");
+    }
+    roleOpts.forEach(function (btn) {
+      btn.addEventListener("click", function () { setRole(btn.getAttribute("data-role")); });
+    });
+
+    /* pre-select role if arriving from sign-up (signup.html passes ?role=) */
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("role") === "coach") setRole("coach");
+
+    /* ---------- show / hide password ---------- */
+    var pwdToggle = document.getElementById("pwdToggle");
+    pwdToggle.addEventListener("click", function () {
+      var show = pwd.type === "password";
+      pwd.type = show ? "text" : "password";
+      pwdToggle.textContent = show ? "Hide" : "Show";
+      pwdToggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    });
+
+    /* ---------- validation ---------- */
+    function validate() {
+      var ok = true;
+
+      if (!EMAIL_RE.test(email.value.trim())) {
+        emailErr.textContent = "Enter a valid email, e.g. name@example.com";
+        email.classList.add("is-invalid");
+        ok = false;
+      } else {
+        emailErr.textContent = "";
+        email.classList.remove("is-invalid");
+      }
+
+      if (!STRONG_PW.test(pwd.value)) {
+        pwdErr.textContent = "Min 8 characters with an uppercase, a lowercase, a number and a symbol.";
+        pwd.classList.add("is-invalid");
+        ok = false;
+      } else {
+        pwdErr.textContent = "";
+        pwd.classList.remove("is-invalid");
+      }
+      return ok;
+    }
+
+    
+  })();
+</script>
+<script src="signin.js"></script>
+</body>
+</html>
