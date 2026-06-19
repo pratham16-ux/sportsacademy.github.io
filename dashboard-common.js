@@ -88,4 +88,23 @@
 
   window.StacklyDash = { session, showPanel, toast, set };
   document.dispatchEvent(new CustomEvent('dash:ready'));
+
+  window.StacklyDash = { session, showPanel, toast, set };
+
+  // Fire dash:ready only after the page script (coach/member) has had a
+  // chance to register its listener. Dispatching synchronously here fires
+  // the event before coach-dashboard.js runs, so its handler never catches it.
+  function fireDashReady() {
+    document.dispatchEvent(new CustomEvent('dash:ready'));
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fireDashReady);
+  } else {
+    fireDashReady();
+  }
+
 })();
+
+window.StacklyDash = { session, showPanel, toast, set };
+document.dispatchEvent(new CustomEvent('dash:ready'));   // fires immediately
+
