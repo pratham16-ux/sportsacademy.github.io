@@ -3,43 +3,55 @@
 
 const AUTH_KEY = 'stacklyAuth';
 
-const form   = document.getElementById('signinForm');
-const email  = document.getElementById('email');
-const pass   = document.getElementById('password');
-const btn    = document.getElementById('signinBtn');
+const form     = document.getElementById('signinForm');
+const email    = document.getElementById('email');
+const pass     = document.getElementById('password');
+const btn      = document.getElementById('signinBtn');
 const roleBtns = document.querySelectorAll('.role-opt');
 
 let role = 'member';
 
+function setRole(next) {
+  role = next;
+  roleBtns.forEach(b => {
+    const on = b.dataset.role === role;
+    b.classList.toggle('is-active', on);
+    b.setAttribute('aria-selected', String(on));
+  });
+  btn.textContent = role === 'coach' ? 'Sign in as Coach' : 'Sign in as Member';
+  if (!email.value.trim()) {
+    email.placeholder = role === 'coach' ? 'coach@stacklysports.in' : 'member@stacklysports.in';
+  }
+}
+
 roleBtns.forEach(b => {
-  b.onclick = () => {
-    roleBtns.forEach(x => { x.classList.remove('is-active'); x.setAttribute('aria-selected', 'false'); });
-    b.classList.add('is-active');
-    b.setAttribute('aria-selected', 'true');
-    role = b.dataset.role;
-    btn.textContent = role === 'coach' ? 'Sign in as Coach' : 'Sign in as Member';
-    if (!email.value.trim()) {
-      email.placeholder = role === 'coach' ? 'coach@stacklysports.in' : 'member@stacklysports.in';
-    }
-  };
+  b.addEventListener('click', () => setRole(b.dataset.role));
 });
+
+// arriving from sign-up with ?role=coach? start on the right tab.
+if (new URLSearchParams(location.search).get('role') === 'coach') setRole('coach');
 
 // show / hide the password
 document.getElementById('pwdToggle').addEventListener('click', e => {
   const hidden = pass.type === 'password';
   pass.type = hidden ? 'text' : 'password';
-  e.target.textContent = hidden ? 'Hide' : 'Show';
+  e.currentTarget.textContent = hidden ? 'Hide' : 'Show';
 });
 
-document.getElementById('forgotLink').addEventListener('click', e => {
-  e.preventDefault();
-  alert('Password resets go through the front desk for now — give us a call on +91 98765 43210.');
-});
+// forgot-password link — no reset flow yet, so point them at the front desk.
+// guarded so a missing/renamed link can't take the whole script down.
+const forgot = document.getElementById('forgotLink') || document.querySelector('.auth-link');
+if (forgot) {
+  forgot.addEventListener('click', e => {
+    e.preventDefault();
+    alert('Password resets go through the front desk for now — give us a call on +91 98765 43210.');
+  });
+}
 
 // clear the red as soon as they start fixing the field
 [email, pass].forEach(el => {
   el.addEventListener('input', () => {
-    el.classList.remove('has-error');
+    el.classList.remove('is-invalid');
     el.closest('.auth-field').querySelector('.auth-error').textContent = '';
   });
 });
@@ -95,7 +107,7 @@ form.addEventListener('submit', e => {
 });
 
 function flag(input, msg) {
-  input.classList.add('has-error');
+  input.classList.add('is-invalid');
   input.closest('.auth-field').querySelector('.auth-error').textContent = msg;
   return false;
 }
