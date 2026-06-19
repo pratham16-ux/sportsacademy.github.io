@@ -3,130 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page not found — Stackly Sports Academy</title>
-<meta name="description" content="This page has gone off the track. Head back to the Stackly Sports Academy home page, browse our programs, or book a free trial session.">
-<link rel="icon" href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70&fm=webp&fit=crop" type="image/webp">
+<title>404 — Page Not Found · Stackly Sports Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="nav.css">
 <style>
-  /* ---------- 404 — "off the track" lane treatment ---------- */
-  .error-hero{
+  /* ── design tokens (inline subset — no base.css dependency risk) ── */
+  :root{
+    --field-deep:  #0F2E1F;
+    --field:       #1A4530;
+    --field-soft:  #2D6147;
+    --gold:        #C9A227;
+    --gold-deep:   #A8841A;
+    --gold-soft:   #E8C766;
+    --cream:       #F7F3E8;
+    --cream-dim:   #EDE8D6;
+    --ink:         #1C2B22;
+    --ink-soft:    #4A534C;
+    --line:        #D9D3BF;
+    --f-display:   'Bebas Neue', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    --f-body:      'Inter', system-ui, sans-serif;
+    --f-mono:      'JetBrains Mono', 'Fira Mono', monospace;
+    --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-soft:   cubic-bezier(0.45, 0, 0.15, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--f-body);
+    background: var(--field-deep);
+    color: var(--cream);
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--field-deep);
-    color: var(--cream);
-    position: relative;
+    justify-content: center;
     overflow: hidden;
-    padding-top: 78px;
+    position: relative;
   }
-  /* faint running-track lanes drifting across the background */
-  .error-lanes{
-    position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(
-      115deg,
-      transparent 0,
-      transparent 84px,
-      rgba(232,199,102,0.06) 84px,
-      rgba(232,199,102,0.06) 86px
-    );
-    animation: laneDrift 24s linear infinite;
-  }
-  @keyframes laneDrift{ to{ background-position: 600px 0; } }
 
-  .error-inner{
+  /* ── animated field-texture background ── */
+  .bg-field {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* grass lines */
+  .bg-field::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        rgba(26,69,48,0.45) 0px,
+        rgba(26,69,48,0.45) 60px,
+        rgba(15,46,31,0.45) 60px,
+        rgba(15,46,31,0.45) 120px
+      );
+    animation: fieldDrift 24s linear infinite;
+  }
+
+  /* centre circle */
+  .bg-field::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(201,162,39,0.18);
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes fieldDrift {
+    from { background-position: 0 0; }
+    to   { background-position: 120px 0; }
+  }
+
+  /* faint radial vignette */
+  .bg-vignette {
+    position: fixed; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%,
+      transparent 30%, rgba(10,32,18,0.72) 100%);
+  }
+
+  /* ── content ── */
+  .page {
     position: relative; z-index: 2;
-    max-width: var(--maxw);
-    margin-inline: auto;
-    padding-inline: var(--edge);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 640px;
     width: 100%;
-    padding-block: var(--gap-xl);
   }
-  .error-eyebrow{ color: var(--gold-soft); }
-  .error-eyebrow::before{ background: var(--gold-soft); }
 
-  /* the lane / bib number — the signature element */
-  .error-code{
+  /* large 404 glyph */
+  .glyph {
     font-family: var(--f-display);
-    font-weight: 700;
-    font-size: clamp(6rem, 4rem + 18vw, 16rem);
-    line-height: 0.82;
+    font-size: clamp(7rem, 22vw, 14rem);
+    line-height: 0.88;
     letter-spacing: -0.02em;
     color: transparent;
-    -webkit-text-stroke: 2px var(--gold-soft);
-    text-stroke: 2px var(--gold-soft);
-    margin-block: var(--gap-s) var(--gap-m);
+    -webkit-text-stroke: 1.5px var(--gold-soft);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.9s var(--ease-out) 0.1s forwards;
     position: relative;
-    display: inline-block;
-  }
-  /* the middle 0 filled solid, like a lane marker */
-  .error-code .fill{ color: var(--gold-soft); -webkit-text-stroke: 0; }
-
-  .error-hero h1{
-    color: var(--cream);
-    font-size: var(--step3);
-    max-width: 18ch;
-  }
-  .error-hero p{
-    color: var(--cream-dim);
-    font-size: var(--step1);
-    max-width: 46ch;
-    margin-top: var(--gap-s);
-  }
-  .error-actions{
-    display: flex; gap: var(--gap-s); flex-wrap: wrap;
-    margin-top: var(--gap-l);
+    user-select: none;
   }
 
-  /* quick links back into the site */
-  .error-links{
-    display: flex; gap: var(--gap-m); flex-wrap: wrap;
-    margin-top: var(--gap-xl);
-    padding-top: var(--gap-m);
-    border-top: 1px solid rgba(247,243,232,0.14);
+  /* gold stripe through the 404 */
+  .glyph::after {
+    content: "404";
+    position: absolute;
+    inset: 0;
+    color: var(--gold-soft);
+    -webkit-text-stroke: 0;
+    clip-path: inset(47% 0 47% 0);
+    opacity: 0.22;
   }
-  .error-links a{
+
+  .tagline {
     font-family: var(--f-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--cream-dim);
-    display: inline-flex; align-items: center; gap: 0.5em;
-    transition: color .25s var(--ease-out);
+    color: var(--gold-soft);
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.35s forwards;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
   }
-  .error-links a::before{ content: "↳"; color: var(--gold-soft); }
-  .error-links a:hover{ color: var(--gold-soft); }
+  .tagline::before,
+  .tagline::after {
+    content: "";
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--gold-deep);
+  }
 
-  @media (max-width: 640px){
-    .error-hero p{ font-size: var(--step0); }
+  .headline {
+    font-family: var(--f-display);
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--cream);
+    margin-top: 1rem;
+    max-width: 20ch;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+  }
+
+  .sub {
+    font-size: 0.95rem;
+    color: rgba(237,232,214,0.7);
+    margin-top: 0.9rem;
+    max-width: 38ch;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.65s forwards;
+  }
+
+  /* ── action buttons ── */
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--f-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85em 1.7em;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.25s var(--ease-out), background 0.25s, color 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--field-deep);
+  }
+  .btn-primary:hover { background: var(--gold-soft); box-shadow: 0 8px 24px rgba(201,162,39,0.3); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: 1.5px solid rgba(247,243,232,0.28);
+  }
+  .btn-ghost:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+
+  .btn svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none; stroke-width: 2.2;
+    flex-shrink: 0;
+  }
+
+  /* ── quick links ── */
+  .quick-links {
+    margin-top: 2.4rem;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 1s forwards;
+  }
+  .quick-links p {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(237,232,214,0.45);
+    margin-bottom: 0.8rem;
+  }
+  .quick-links ul {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem 1.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .quick-links a {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    color: rgba(237,232,214,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex; align-items: center; gap: 0.3em;
+  }
+  .quick-links a::before {
+    content: "→";
+    color: var(--gold-deep);
+    font-size: 0.7rem;
+  }
+  .quick-links a:hover { color: var(--gold-soft); }
+
+  /* ── brand stamp ── */
+  .brand-stamp {
+    position: fixed;
+    bottom: 1.6rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(247,243,232,0.22);
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.3s forwards;
+  }
+
+  /* ── animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glyph, .tagline, .headline, .sub, .actions, .quick-links, .brand-stamp {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .bg-field::before { animation: none; }
+  }
+
+  @media (max-width: 480px) {
+    .actions { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
   }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
 
+<div class="bg-field" aria-hidden="true"></div>
+<div class="bg-vignette" aria-hidden="true"></div>
 
-<main id="main">
+<main class="page" role="main">
 
-  <section class="error-hero">
-    <div class="error-lanes" aria-hidden="true"></div>
-    <div class="error-inner">
-      <span class="eyebrow error-eyebrow">Error 404 · Off the track</span>
-      <div class="error-code" aria-hidden="true">4<span class="fill">0</span>4</div>
-      <h1>This lane leads off the track</h1>
-      <p>The page you were after has been moved, renamed, or never existed. Let's get you back to a marked lane.</p>
-      <div class="error-actions">
-        <a href="index.html" class="btn btn-gold">Back to home</a>
-        <a href="contact.html" class="btn btn-ghost" style="border-color: var(--cream-dim); color: var(--cream);">Book a free trial</a>
-      </div>
-      
-    </div>
-  </section>
+  <div class="glyph" aria-hidden="true">404</div>
+
+  <span class="tagline">Out of bounds</span>
+
+  <h1 class="headline">This play was offside</h1>
+
+  <p class="sub">The page you're looking for isn't on our lineup. It may have moved, been renamed, or never made the cut.</p>
+
+  <div class="actions">
+    <button class="btn btn-ghost" id="backBtn" aria-label="Go back to previous page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Go back
+    </button>
+    <a href="index.html" class="btn btn-primary">
+      Back to home
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <nav class="quick-links" aria-label="Quick links">
+    <p>Or head to</p>
+    <ul>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="coaches.html">Coaches</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
 </main>
 
+<p class="brand-stamp" aria-hidden="true">Stackly Sports Academy</p>
 
-<script src="site.js"></script>
+<script>
+  (function () {
+    var btn = document.getElementById('backBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      // Always go back one step in the browser history.
+      // We set a short timeout: if history.back() actually navigated away,
+      // the timeout never fires. If nothing happened (no history / direct load),
+      // the timeout fires and we fall back to the home page.
+      var fallback = setTimeout(function () {
+        window.location.href = 'index.html';
+      }, 300);
+
+      // Cancel the fallback if the page is about to unload
+      window.addEventListener('beforeunload', function () {
+        clearTimeout(fallback);
+      }, { once: true });
+
+      window.history.back();
+    });
+  })();
+</script>
 </body>
 </html>

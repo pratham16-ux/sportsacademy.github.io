@@ -331,3 +331,5 @@ body.drawer-locked{ overflow: hidden; }
   transform: translateY(-2px);
 }
 .footer-socials svg{ width: 17px; height: 17px; display: block; }
+
+.footer-bottom .footer-links { display: flex; gap: 20px; }

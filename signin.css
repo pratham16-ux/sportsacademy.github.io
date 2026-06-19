@@ -155,11 +155,30 @@
   display:flex; align-items:center; justify-content:space-between;
   margin-block: 0.3em var(--gap-s); flex-wrap:wrap; gap: 0.5em;
 }
+
 .auth-check{
-  display:flex; align-items:center; gap: 0.5em;
-  font-family: var(--f-mono); font-size: 0.74rem; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 0.55em;
+  font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink-soft);
+  cursor: pointer; user-select: none;
 }
-.auth-check input{ accent-color: var(--field); width: 15px; height: 15px; }
+.auth-check input{
+  appearance: none; -webkit-appearance: none; margin: 0;
+  width: 17px; height: 17px; flex: 0 0 17px;       /* fixed target, won't shrink */
+  border: 1.5px solid var(--line); border-radius: 3px;
+  background: var(--white); cursor: pointer;
+  display: grid; place-content: center;
+  transition: border-color .15s var(--ease-soft), background .15s var(--ease-soft);
+}
+.auth-check input::before{
+  content: ""; width: 10px; height: 10px; transform: scale(0);
+  background: var(--field);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%); /* checkmark */
+  transition: transform .15s var(--ease-out);
+}
+.auth-check:hover input{ border-color: var(--field); }
+.auth-check input:checked{ border-color: var(--field); }
+.auth-check input:checked::before{ transform: scale(1); }
+
 .auth-link{
   font-family: var(--f-mono); font-size: 0.74rem; color: var(--field);
   text-decoration: underline; text-underline-offset: 3px;
