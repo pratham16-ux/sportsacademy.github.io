@@ -11,6 +11,21 @@
 <link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="contact.css">
 </head>
+<style>
+  /* Leaflet map container */
+  #leafletMap {
+    width: 100%;
+    height: 420px;
+  }
+  @media (max-width: 640px) {
+    #leafletMap { height: 300px; }
+  }
+  /* Override Leaflet popup font to match site */
+  .leaflet-popup-content-wrapper {
+    border-radius: 4px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
+  }
+</style>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -294,38 +309,27 @@
   </section>
 
   <!-- 5. CAMPUS MAP -->
-  <section class="section map-section section--tight">
-    <div class="wrap" style="margin-bottom:var(--gap-m);">
-      <div class="section-head" data-reveal style="margin-bottom:0;">
-        <span class="eyebrow">Getting here</span>
-        <h2>Three campuses across north Bengaluru</h2>
-      </div>
+<!-- REPLACE the entire section#5 CAMPUS MAP with this: -->
+<section class="section map-section section--tight">
+  <div class="wrap" style="margin-bottom:var(--gap-m);">
+    <div class="section-head" data-reveal style="margin-bottom:0;">
+      <span class="eyebrow">Getting here</span>
+      <h2>Three campuses across north Bengaluru</h2>
     </div>
-    <div class="map-frame" aria-label="Approximate campus locations" role="img">
-      <!-- decorative grid -->
-      <svg class="map-bg" viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
-        <rect width="1200" height="380" fill="url(#grid)"/>
-      </svg>
-      <div class="map-pins">
-        <button class="map-pin" data-campus="hebbal" aria-label="Hebbal Grounds campus">
-          <div class="map-pin-dot"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/></svg></div>
-          <span>Hebbal Grounds</span>
-        </button>
-        <button class="map-pin" data-campus="vidyaranyapura" aria-label="Vidyaranyapura Turf campus">
-          <div class="map-pin-dot"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/></svg></div>
-          <span>Vidyaranyapura Turf</span>
-        </button>
-        <button class="map-pin" data-campus="yelahanka" aria-label="Yelahanka Track campus">
-          <div class="map-pin-dot"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/></svg></div>
-          <span>Yelahanka Track</span>
-        </button>
-      </div>
-    </div>
-    <div class="wrap">
-      <p class="map-cta-note">Pins are approximate. <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Open Google Maps</a> for accurate turn-by-turn directions to each campus.</p>
-    </div>
-  </section>
+  </div>
+ 
+  <!-- Real Leaflet map — initialised by contact.js -->
+  <div id="leafletMap" aria-label="Interactive map showing Stackly Sports Academy campus locations"></div>
+ 
+  <div class="wrap">
+    <p class="map-cta-note">
+      Click a pin to see campus details.
+      <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Open Google Maps</a>
+      for turn-by-turn directions.
+    </p>
+  </div>
+</section>
+ 
 
   <!-- 6. TRIAL SESSION INFO -->
   <section class="section section--cream-dim">
@@ -456,16 +460,16 @@
       <div class="footer-col">
         <h4>Campuses</h4>
         <ul>
-          <li><a href="#" onclick="document.querySelector('[data-campus=hebbal]').click(); return false;">Hebbal Grounds</a></li>
-          <li><a href="#" onclick="document.querySelector('[data-campus=vidyaranyapura]').click(); return false;">Vidyaranyapura Turf</a></li>
-          <li><a href="#" onclick="document.querySelector('[data-campus=yelahanka]').click(); return false;">Yelahanka Track</a></li>
+          <li><a href="404.html" onclick="document.querySelector('[data-campus=hebbal]').click(); return false;">Hebbal Grounds</a></li>
+          <li><a href="404.html" onclick="document.querySelector('[data-campus=vidyaranyapura]').click(); return false;">Vidyaranyapura Turf</a></li>
+          <li><a href="404.html" onclick="document.querySelector('[data-campus=yelahanka]').click(); return false;">Yelahanka Track</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Reach the front desk</h4>
         <ul>
-          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
-          <li><a href="mailto:hello@stacklysports.in">hello@stacklysports.in</a></li>
+          <li><a href="404.html">+91 98765 43210</a></li>
+          <li><a href="404.html">hello@stacklysports.in</a></li>
           <li>6:00am – 8:30pm, all week</li>
         </ul>
       </div>
